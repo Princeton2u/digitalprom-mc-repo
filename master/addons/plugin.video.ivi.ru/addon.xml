@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<addons>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.4.8" provider-name="ivi.ru (NuisMons)">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
@@ -12,13 +11,4 @@
     <platform>all</platform>
   </extension>
 </addon>
-<addon id="plugin.video.lapti.tv" name="Lapti.tv" version="0.2.0" provider-name="Lapti.tv">
-  <requires><import addon="xbmc.python" version="1.0"/></requires>
-  <extension point="xbmc.python.pluginsource"  provides="video" library="default.py"><provides>video</provides></extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Онлайн ТВ lapti.tv</summary>
-    <description>С помощью плагина Lapti.tv Вы можете смотреть любимые ТВ каналы и передачи с сайта Lapti.tv</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-</addons>
+
