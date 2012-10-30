@@ -402,6 +402,68 @@ The initial search is always done on MusicBrainz. In case allmusic link is not a
     <platform>all</platform>
   </extension>
 </addon>
+<<<<<<< HEAD
+=======
+<addon id="plugin.image.google"
+       name="google"
+       version="0.9.2"
+       provider-name="Rick Phillips (ruuk)">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+    <import addon="script.module.simplejson" version="2.0.9"/>
+   </requires>
+
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>image</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Plugin to search and browse google images</summary>
+    <description>Search, view, and save Google Images. Includes advanced search and search history. Note: only 32 images per search - a Google limit.</description>
+	<platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.image.picasa"
+       name="Picasa"
+       version="0.8.8"
+       provider-name="Rick Phillips (ruuk)">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+    <import addon="script.module.elementtree" version="1.2.7"/>
+  </requires>
+
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>image</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Plugin to browse picasa albums and photos/videos</summary>
+    <summary lang="nl">Blader door uw Picasa albums en afbeeldingen van u zelf of uw vrienden.</summary>
+
+    <description lang="en">Browse your picasa albums and tags. Browse your favorite user's albums, tags, and their favorite users. Search your photos/videos, your contact's photos/videos, and search Picasa. View maps of photos with geo location data.</description>
+    <description lang="nl">Blader door uw Picasa albums en afbeeldingen van u zelf of uw vrienden.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.video.cinema.mosfilm.ru"
+       name="[COLOR FF00FF00]Мосфильм ([/COLOR][COLOR FFFFF000]cinema.mosfilm.ru[/COLOR][COLOR FF00FF00])[/COLOR]"
+       version="1.0.2"
+       provider-name="Silen">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+             provides="video"
+             library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Мосфильм (cinema.mosfilm.ru)</summary>
+    <description>Иинтернет-кинотеатр ФГУП «Киноконцерн «Мосфильм» (cinema.mosfilm.ru).</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+>>>>>>> 7e6e893ed035148d4b7b508f5aa55d96031b8520
 <addon id='plugin.video.youtube' version='3.2.0' name='YouTube' provider-name='TheCollective'>
   <requires>
     <import addon='xbmc.python' version='2.0'/>
@@ -432,6 +494,7 @@ The initial search is always done on MusicBrainz. In case allmusic link is not a
     <platform>all</platform>
   </extension>
 </addon>
+<<<<<<< HEAD
 <addon id='script.common.plugin.cache' version='1.1.0' name='Common plugin cache' provider-name='TheCollective'>
   <requires>
     <import addon='xbmc.python' version='2.0'/>
@@ -467,6 +530,8 @@ The initial search is always done on MusicBrainz. In case allmusic link is not a
   </extension>
   <extension point='xbmc.python.module' library='lib' />
 </addon>
+=======
+>>>>>>> 7e6e893ed035148d4b7b508f5aa55d96031b8520
 <addon id="script.rss.editor"
        name="RSS Editor"
        version="2.0.2"
