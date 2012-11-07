@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+<addon id="metadata.album.universal"
+       name="Universal Album Scraper"
+       version="1.3.6"
+       provider-name="Olympia, Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="metadata.common.last.fm" version="1.3.2"/>
+    <import addon="metadata.common.allmusic.com" version="2.3.1"/>
+    <import addon="metadata.common.musicbrainz.org" version="1.2.3"/>
+    <import addon="metadata.common.fanart.tv" version="1.0.1"/>
+    <import addon="metadata.common.amazon.de" version="1.0.0"/>
+    <import addon="metadata.common.theaudiodb.com" version="1.1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.albums"
+             language="en"
+             library="albumuniversal.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Universal Scraper for Albums</summary>
+    <summary lang="zh">通用音乐专辑信息刮削器</summary>
+    <description lang="en">This scraper collects information from the following supported sites: MusicBrainz, last.fm, allmusic.com and amazon.de, while grabs artwork from: fanart.tv, last.fm and allmusic.com. It can be set field by field that from which site you want that specific information.
+
+The initial search is always done on MusicBrainz. In case allmusic and/or amazon.de links are not added on the MusicBrainz site, fields from allmusic.com and/or amazon.de cannot be fetched (very easy to add those missing links though).</description>
+    <description lang="zh">本刮削器支持从以下网站获取信息：MusicBrainz、last.fm、allmusic.com和amazon.de，并从以下网站获取艺术图片：fanart.tv、last.fm和allmusic.com。你可以指定每一项内容的来源网站。
+
+初始结果总是先从MusicBrainz获取。如果MusicBrainz网站没有到allmusic和/或amazon.de的外部链接，则无法获取allmusic.com的/或amazon.de的信息（当然你能很容易地加入缺失的链接）。</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="metadata.artists.universal"
+       name="Universal Artist Scraper"
+       version="2.1.8"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="metadata.common.last.fm" version="1.5.1"/>
+    <import addon="metadata.common.allmusic.com" version="2.5.2"/>
+    <import addon="metadata.common.musicbrainz.org" version="1.2.1"/>
+    <import addon="metadata.common.htbackdrops.com" version="1.2.0"/>
+    <import addon="metadata.common.fanart.tv" version="1.1.0"/>
+    <import addon="metadata.common.theaudiodb.com" version="1.2.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.artists"
+             language="en"
+             library="artistuniversal.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Universal Scraper for Artists</summary>
+    <summary lang="zh">通用艺术家信息刮削器</summary>
+    <description lang="en">This scraper collects information from the following supported sites: TheAudioDb.com, MusicBrainz, last.fm, and allmusic.com, while grabs artwork from: fanart.tv, htbackdrops.com, last.fm and allmusic.com. It can be set field by field that from which site you want that specific information.
+
+The initial search is always done on MusicBrainz. In case allmusic link is not added on the MusicBrainz site fields from allmusic.com cannot be fetched (very easy to add those missing links though).</description>
+    <description lang="zh">本刮削器支持从以下网站获取信息：TheAudioDb.com、MusicBrainz、last.fm和allmusic.com，并从以下网站获取艺术图片：fanart.tv、htbackdrops.com、last.fm和allmusic.com。你可以指定每一项内容的来源网站。
+
+初始结果总是先从MusicBrainz获取，如果MusicBrainz网站未加入到allmusic的外部链接，则无法获取allmusic.com的信息（当然你能很容易地加入缺失的链接）。</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="metadata.common.allmusic.com"
+       name="AllMusic"
+        version="2.5.2"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="allmusic.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на музикална инф. от AllMusic</summary>
+    <summary lang="en">AllMusic Music Scraper Library</summary>
+    <summary lang="de">Musik-Scraper für AllMusic.com</summary>
+    <summary lang="es">Scraper de música de AllMusic</summary>
+    <summary lang="fi">AllMusic musiikkitietojen lataajan kirjasto</summary>
+    <summary lang="fr">Scraper AllMusic pour la musique</summary>
+    <summary lang="hu">AllMusic zenei adat leolvasó</summary>
+    <summary lang="nl">AllMusic-scraperfuncties</summary>
+    <summary lang="pl">Scraper muzyki AllMusic</summary>
+    <summary lang="pt">Scraper de música AllMusic</summary>
+    <summary lang="ro">Bibliotecă catalog de muzică AllMusic</summary>
+    <summary lang="ru">Музыкальная Информация AllMusic</summary>
+    <summary lang="se">Skrapa för AllMusic.com</summary>
+    <summary lang="zh">AllMusic音乐刮削器代码库</summary>
+    <description lang="bg">Извлича инф. за музикални файлове от www.allmusic.com</description>
+    <description lang="en">Download Music information from www.allmusic.com</description>
+    <description lang="de">Downloade Musik Informationen von www.allmusic.com</description>
+    <description lang="es">Descarga información musical de www.allmusic.com</description>
+    <description lang="fi">Lataa musiikkitietoja osoitteesta www.allmusic.com</description>
+    <description lang="fr">Télécharger les infos musicales depuis www.allmusic.com</description>
+    <description lang="hu">Zene információk letöltése a www.allmusic.com webhelyről</description>
+    <description lang="nl">Muziekinformatie ophalen van www.allmusic.com</description>
+    <description lang="pl">Pobieraj informacje o muzyce z www.allmusic.com</description>
+    <description lang="pt">Descarregar informação de música de www.allmusic.com</description>
+    <description lang="ro">Descărcați informații muzică de pe www.allmusic.com</description>
+    <description lang="ru">Загружать информацию о Музыке с www.allmusic.com</description>
+    <description lang="se">Ladda ner musikinformation från www.allmusic.com</description>
+    <description lang="zh">从www.allmusic.com下载音乐信息</description>
+  </extension>
+</addon>
+<addon id="metadata.common.hdtrailers.net"
+       name="HD-Trailers common scraper functions"
+       version="1.0.8"
+       provider-name="Bence Nádas (olympia)">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="hdtrailers.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">HD-Trailers.net Scraper Library</summary>
+    <summary lang="de">Scraper für Trailer von HD-Trailers.net</summary>
+    <summary lang="es">Scraper de Trailers de HD-Trailers.net</summary>
+    <summary lang="fr">Scraper HD-Trailers.net pour les bande-annonces</summary>
+    <summary lang="hu">HD-Trailers.net leolvasó-könyvtár</summary>
+    <summary lang="nl">HD-Trailers.net Scraper Collectie</summary>
+    <summary lang="pl">Scraper zwiastunów HD-Trailers.net</summary>
+    <summary lang="pt">Scraper de trailers de HD-Trailers.net</summary>
+    <summary lang="ru">Обработчик для трейлеров с HD-Trailers.net</summary>
+    <summary lang="zh">HD-Trailers.net刮削器代码库</summary>
+    <description lang="en">Download Movie Trailers from www.hd-trailers.net</description>
+    <description lang="de">Downloade Trailer von www.hd-trailers.net</description>
+    <description lang="es">Descarga trailers de www.hd-trailers.net</description>
+    <description lang="fr">Télécharge les bande-annonces de films depuis www.hd-trailers.net</description>
+    <description lang="hu">Filmelőzetesek letöltése a www.hd-trailers.net-ről</description>
+    <description lang="nl">Download trailers van www.hd-trailers.net</description>
+    <description lang="pl">Pobieraj zwiastuny filmowe z www.hd-trailers.net</description>
+    <description lang="pt">Descarregar trailers de www.hd-trailers.net</description>
+    <description lang="ru">Загружать трейлеры с www.hd-trailers.net</description>
+    <description lang="zh">从www.hd-trailers.net下载电影预告片</description>
+    <minversion>20000</minversion>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="metadata.common.imdb.com"
+       name="IMDB common scraper functions"
+       version="2.4.0"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="imdb.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на инф. от IMDB</summary>
+    <summary lang="en">IMDB Scraper Library</summary>
+    <summary lang="fi">IMDB elokuvatietojen lataaja</summary>
+    <summary lang="hu">IMDB leolvasó-könyvtár</summary>
+    <summary lang="kr">IMDB 스크래퍼 라이브러리</summary>
+    <summary lang="nl">IMDB Scraper Bibliotheek</summary>
+    <summary lang="pl">Scraper IMDb</summary>
+    <summary lang="pt">Scraper de filmes IMDb</summary>
+    <summary lang="se">Skrapa för IMDB</summary>
+    <description lang="bg">Сваля информация за филми от www.imdb.com</description>
+    <description lang="en">Download Movie information from www.imdb.com</description>
+    <description lang="fi">Lataa elokuvatietoja osoitteesta www.imdb.com</description>
+    <description lang="hu">Film információk letöltése a www.imdb.com webhelyről</description>
+    <description lang="kr">www.imdb.com 에서 영화 정보 다운로드</description>
+    <description lang="nl">Download film informatie van www.imdb.com</description>
+    <description lang="pl">Pobieraj informacje o filmach z www.imdb.com</description>
+    <description lang="pt">Descarregar informação de filmes de www.imdb.com</description>
+    <description lang="se">Ladda ner filminformation från www.imdb.com</description>
+  </extension>
+</addon>
+<addon id="metadata.common.last.fm"
+       name="Last.FM"
+       version="1.5.1"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="lastfm.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на инф. от LastFM</summary>
+    <summary lang="en">LastFM Scraper Library</summary>
+    <summary lang="de">Musik-Scraper für LastFM</summary>
+    <summary lang="es">Scraper de música de LastFM</summary>
+    <summary lang="fi">LastFM musiikkitietojen lataaja</summary>
+    <summary lang="fr">Scraper LastFM</summary>
+    <summary lang="hu">LastFM leolvasó-könyvtár</summary>
+    <summary lang="nl">LastFM-scraperfuncties</summary>
+    <summary lang="pl">Scraper biblioteki LastFM</summary>
+    <summary lang="pt">Scraper de música LastFM</summary>
+    <summary lang="ru">Обработчик для LastFM</summary>
+    <summary lang="se">Skrapebibliotek för LastFM</summary>
+    <summary lang="zh">LastFM刮削器代码库</summary>
+    <description lang="bg">Извлича инф. за музикални файлове от www.last.fm</description>
+    <description lang="en">Download Music information from www.last.fm</description>
+    <description lang="de">Downloade Musik informationen von www.last.fm</description>
+    <description lang="es">Descargar información musical de www.last.fm</description>
+    <description lang="fi">Lataa musiikkitietoja osoitteesta www.last.fm</description>
+    <description lang="fr">Télécharge les infos musicales depuis www.last.fm</description>
+    <description lang="hu">Zene információk letöltése a www.last.fm webhelyről</description>
+    <description lang="nl">Muziekinfo ophalen van LastFM</description>
+    <description lang="pl">Pobieraj informacje o muzyce z www.last.fm</description>
+    <description lang="pt">Descarregar informação de música de www.last.fm</description>
+    <description lang="ru">Загружать информацию о Музыке с www.last.fm</description>
+    <description lang="se">Ladda ner musikinformation från www.last.fm</description>
+    <description lang="zh">从www.last.fm下载音乐信息</description>
+  </extension>
+</addon>
+<addon id="metadata.common.theaudiodb.com"
+       name="TheAudioDb Common Scraper Functions"
+       version="1.2.0"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="tadb.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на музикална инф. от TheAudioDb</summary>
+    <summary lang="en">TheAudioDb Music Scraper Library</summary>
+    <summary lang="de">Musik-Scraper für TheAudioDb.org</summary>
+    <summary lang="es">Scraper de música de TheAudioDb</summary>
+    <summary lang="fi">TheAudioDb musiikkitietojen lataajan kirjasto</summary>
+    <summary lang="fr">Scraper TheAudioDb pour la musique</summary>
+    <summary lang="hu">TheAudioDb zenei adat leolvasó</summary>
+    <summary lang="nl">TheAudioDb-scraperfuncties</summary>
+    <summary lang="pl">Scraper muzyki TheAudioDb</summary>
+    <summary lang="pt">Scraper de música TheAudioDb</summary>
+    <summary lang="ro">Bibliotecă catalog de muzică TheAudioDb</summary>
+    <summary lang="ru">Музыкальная Информация TheAudioDb</summary>
+    <summary lang="se">Skrapa för TheAudioDb.org</summary>
+    <summary lang="zh">TheAudioDb音乐刮削器代码库</summary>
+    <description lang="bg">Извлича инф. за музикални файлове от www.theaudiodb.com</description>
+    <description lang="en">Download Music information from www.theaudiodb.com</description>
+    <description lang="de">Downloade Musik Informationen von www.theaudiodb.com</description>
+    <description lang="es">Descarga información musical de www.theaudiodb.com</description>
+    <description lang="fi">Lataa musiikkitietoja osoitteesta www.theaudiodb.com</description>
+    <description lang="fr">Télécharger les infos musicales depuis www.theaudiodb.com</description>
+    <description lang="hu">Zene információk letöltése a www.theaudiodb.com webhelyről</description>
+    <description lang="nl">Muziekinformatie ophalen van www.theaudiodb.com</description>
+    <description lang="pl">Pobieraj informacje o muzyce z www.theaudiodb.com</description>
+    <description lang="pt">Descarregar informação de música de www.theaudiodb.com</description>
+    <description lang="ro">Descărcați informații muzică de pe www.theaudiodb.com</description>
+    <description lang="ru">Загружать информацию о Музыке с www.theaudiodb.com</description>
+    <description lang="se">Ladda ner musikinformation från www.theaudiodb.com</description>
+    <description lang="zh">从www.theaudiodb.com下载音乐信息</description>
+  </extension>
+</addon>
+<addon id="metadata.common.themoviedb.org"
+       name="The MovieDB common scraper functions"
+       version="2.6.0"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="tmdb.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на инф. от TMDb</summary>
+    <summary lang="en">TMDb Scraper Library</summary>
+    <summary lang="es">Scraper de peliculas de TMDb</summary>
+    <summary lang="fi">TMDb elokuvatietojen lataajan kirjasto</summary>
+    <summary lang="fr">Scraper TMDb</summary>
+    <summary lang="hu">TMDb leolvasó-könyvtár</summary>
+    <summary lang="nl">TMDb-scraperfuncties</summary>
+    <summary lang="pl">Scraper biblioteki TMDb</summary>
+    <summary lang="pt">Scraper de filmes TMDb</summary>
+    <summary lang="ro">Bibliotecă catalog TMDb</summary>
+    <summary lang="ru">Обработчик для TMDb</summary>
+    <summary lang="se">Skrapebibliotek för TMDb</summary>
+    <summary lang="zh">TMDb刮削器代码库</summary>
+    <description lang="bg">Сваля миниатюри и fanarts от www.themoviedb.org</description>
+    <description lang="en">Download thumbs and fanarts from www.themoviedb.org</description>
+    <description lang="es">Descarga posters y fanart de www.themoviedb.org</description>
+    <description lang="fi">Lataa pienoiskuvia ja fanitaidetta www.themoviedb.org -sivustolta</description>
+    <description lang="fr">Télécharge vignettes et backdrops depuis www.themoviedb.org</description>
+    <description lang="hu">Bélyeg- és fanartképek letöltése a www.themoviedb.org webhelyről</description>
+    <description lang="nl">Miniaturen en fanart ophalen van www.themoviedb.org</description>
+    <description lang="pl">Pobieraj ikony i fanarty z www.themoviedb.org</description>
+    <description lang="pt">Descarregar informação de filmes de www.themoviedb.org</description>
+    <description lang="ro">Descărcați miniaturi și imagini realizate de fani de pe www.themoviedb.org</description>
+    <description lang="ru">Загружать миниатюры и фанарт с www.themoviedb.org</description>
+    <description lang="se">Ladda ner miniatyrer och fanart från www.themoviedb.org</description>
+    <description lang="zh">从www.themoviedb.org下载海报和同人画</description>
+  </extension>
+</addon>
+<addon id="metadata.musicvideos.last.fm"
+       name="Last.fm for Music Videos"
+       version="1.0.1"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="metadata.common.last.fm" version="1.3.2"/>
+    <import addon="metadata.common.fanart.tv" version="1.0.1"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.musicvideos"
+             language="en"
+             library="lastfmmusicvideos.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="bg">Сваля инф. за музикални клипове от Last.fm</summary>
+    <summary lang="en">Last.fm Music Video Scraper</summary>
+    <summary lang="fi">Last.fm musiikkivideotietojen lataaja</summary>
+    <summary lang="hu">Last.fm videóklip leolvasó</summary>
+    <summary lang="kr">야후! 뮤직 비디오 스크래퍼</summary>
+    <summary lang="pl">Scraper teledysków Last.fm</summary>
+    <summary lang="pt">Scraper de música Last.fm</summary>
+    <summary lang="se">Skrapa för Last.fm musik</summary>
+    <summary lang="zh">Last.fm音乐电视刮削器</summary>
+    <description lang="bg">Сваля информация за музикални клипове</description>
+    <description lang="en">Download Music Video information</description>
+    <description lang="fi">Lataa musiikkivideoiden tiedot</description>
+    <description lang="hu">Videóklip információk letöltése a Last.fm webhelyről</description>
+    <description lang="kr">뮤직 비디오 정보 다운로드</description>
+    <description lang="pl">Pobieraj informacje o teledyskach z last.fm</description>
+    <description lang="pt">Descarregar informação de filmes de last.fm</description>
+    <description lang="se">Ladda ner musikvideoinformation från last.fm</description>
+    <description lang="zh">从Last.fm下载音乐电视信息</description>
+  </extension>
+</addon>
+<addon id="metadata.themoviedb.org"
+       name="The MovieDB"
+       version="3.5.0"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="metadata.common.themoviedb.org" version="2.6.0"/>
+    <import addon="metadata.common.hdtrailers.net" version="1.0.7"/>
+    <import addon="metadata.common.imdb.com" version="2.1.9"/>
+    <import addon="plugin.video.youtube" version="2.9.1" optional="true"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.movies"
+             language="en"
+             library="tmdb.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="bg">Сваля инф. за филми от TMDB</summary>
+    <summary lang="en">TMDB Movie Scraper</summary>
+    <summary lang="de">Film Scraper für TheMovieDB</summary>
+    <summary lang="es">Scraper de películas de TheMovieDB</summary>
+    <summary lang="fi">TMDB elokuvatietojen lataaja</summary>
+    <summary lang="hu">TMDB filmadat leolvasó</summary>
+    <summary lang="nl">TMDb-filmscraper</summary>
+    <summary lang="pl">Scraper filmowy TMDB</summary>
+    <summary lang="pt">Scraper de filmes TMDb</summary>
+    <summary lang="ro">Scraper de filme TMDb</summary>
+    <summary lang="ru">Обработчик Фильмов для TMDB</summary>
+    <summary lang="se">Skrapa för TMDb</summary>
+    <summary lang="zh">TMDB电影刮削器</summary>
+    <description lang="bg">themoviedb.org е безплатна и отворена база от данни за филми. Задвижва се изцяло от потребителите си - хора като вас. Милиони хора по света всеки месец ползват TMDb, благодарение на многофункционалното API. Едновременно с това е и източник на информация за медийни центрове, като XBMC, които извличат метаинформация за филми, постери и Fanart.</description>
+    <description lang="en">themoviedb.org is a free and open movie database. It's completely user driven by people like you. TMDb is currently used by millions of people every month and with their powerful API, it is also used by many popular media centers like XBMC to retrieve Movie Metadata, Posters and Fanart to enrich the user's experience.</description>
+    <description lang="de">TheMovieDB.org ist eine freie und offene Filmdatenbank. Sie wird von Benutzern wie Dir betrieben. TheMovieDB wird zur Zeit monatlich von Millionen genutzt. Mit der mächtigen API wird sie auch von vielen Media-Center, wie z.B. XBMC, genutzt um Film Metadaten, Poster und Fanarts zu beziehen, damit der Benutzer sein Media-Center verschönern kann.</description>
+    <description lang="es">themovieDB.org es una base de datos de películas gratuita y abierta. Es una página web que se basa en contenido subido por los usuarios. TMDb es usada diariamente por mucha gente gracias a su API, que es usada por más programas aparte de XBMC para descargar información de películas así como Posters o Fanart (Fondos de escritorio basados en películas usados en distintos skins) para enriquecer la experiencia de usar XBMC.</description>
+    <description lang="fi">themoviedb.org on vapaa ja avoin elokuvatietokanta. Se on täysin käyttäjien ylläpitämä. TMDb:a käyttää miljoonat ihmiset joka kuukausi, sitä käytetään käyttäjäkokemuksen rikastuttamiseen monissa muissakin suosituissa XBMC:n kaltaisissa ohjelmissa lataamalla elokuvien tietoja, julisteita ja fanitaidetta.</description>
+    <description lang="hu">A themoviedb.org egy ingyenes és nyílt filmadatbázis. Teljes egészében olyan felhasználók töltik fel, mint például Te. A TMDb-t havonta emberek milliói használják és a hatékony API-n keresztül számos népszerű média center is, mint például az XBMC a filmadatok, poszterek, fanartképek letöltésére.</description>
+    <description lang="nl">Themoviedb.org is een vrije en open filmdatabank. Gebruikers zoals jij vormen de motor van deze site. Op dit moment gebruiken elke maand miljoenen mensen TMDb. De krachtige API van de site laat mediacenters zoals XBMC toe om metadata, posters en fanart op te halen en zo de gebruikerservaring te verrijken.</description>
+    <description lang="pl">themoviedb.org jest wolną i otwartą filmową bazą danych. Jest zarządzana całkowicie przez osoby takie jak Ty. Obecnie odwiedzają ją miliony osób miesięcznie, a dzięki dostępności API jest używana w wielu media center, takich jak XBMC, do pobierania informacji o filmach, plakatów i fanartów.</description>
+    <description lang="pt">O themoviedb.org é uma base de dados de filmes livre e aberta. É completamente actualizado por pessoas como você e usado por milhões todos os meses. Com o poderoso motor de busca disponível, também se tornou no favorito de muitos softwares média center, como o popular XBMC, para obter informação, posters e fanart que enriquecem a experiência do utilizador.</description>
+    <description lang="ro">themoviedb.org este o bază de date de filme gratuită și deschisă. Este actualizată de oameni ca și tine. TMDb este curent folosită de milioane de oameni în fiecare lună și datorită API-ului puternic, este de asemena folosită de multe centre media populare ca XBMC pentru a obține informații despre filme, afișe și imagini produse de fani (Fanart) care îmbogățesc experiența utilizatorului.</description>
+    <description lang="ru">themoviedb.org это бесплатная и открытая база данных фильмов. Она полностью поддерживается такими же людьми как и ты. В данный момент TMDb используется миллионами людей каждый месяц, и, с его мощным API, используется различными популярными медиа-центрами, такими как XBMC, для получения к Фильмам мета-данных, постеров и фанарта в целях улучшения пользовательского опыта.</description>
+    <description lang="se">themoviedb.org är en fri och öppen filmdatabas. Det drivs helt av människor som dig. TMDb används av miljontals människor varje månad och med deras kraftfulla API, är det också använt av många populära mediacenter som XBMC för att hämta filmmetadata, omslag och fanart för att förgylla användarens upplevelse.</description>
+    <description lang="zh">themoviedb.org是一个开放和自由的电影数据库。它完全由象你一样的用户来掌控。TMDb每月为上百万用户提供服务，并通过强大的API界面为许多流行的媒体中心系统如XBMC提供电影资料、封面海报和同人画以丰富用户的体验。</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="metadata.tvdb.com"
+       name="The TVDB"
+       version="1.4.2"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.tvshows"
+             language="multi"
+             library="tvdb.xml"
+             cachepersistence="00:15"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="bg">Изтегля информация за ТВ Сериали от TheTVDB.com</summary>
+    <summary lang="en">Fetch TV show metadata from TheTVDB.com</summary>
+    <summary lang="de">Scraper für Fernsehserien von TheTVDB.com</summary>
+    <summary lang="es">Descarga información de Series de TV desde TVDB.com</summary>
+    <summary lang="fi">Nouda TV-ohjelmien tietoja TheTVDB.com -sivustolta</summary>
+    <summary lang="fr">Scraper TheTVDB.com pour les séries TV</summary>
+    <summary lang="hu">TV műsor információk a TheTVDB.com-ról</summary>
+    <summary lang="nl">Seriemetadata ophalen van TheTVDB.com</summary>
+    <summary lang="pl">Pobieraj dane o serialach TV z TheTVDB.com</summary>
+    <summary lang="pt">Scraper de séries de TV TVDB.com</summary>
+    <summary lang="ru">Загрузка информации о ТВ-шоу с TheTVDB.com</summary>
+    <summary lang="se">Skrapa för TV-seriemetadata från TVDB.com</summary>
+    <summary lang="zh">从TheTVDB.com获取电视剧集信息</summary>
+    <description lang="bg">TheTVDB.com предоставя информация за ТВ Сериали. Сайтът представлява една огромна, безплатна и отворена база от данни. Всеки може да редактира (наличната информация) или да добавя нова. Съдържа подробни данни за много сериали и на различни езици. Цялото съдържание на сайта и публикуваните изображения са предоставени от потребители за потребителите. Съдържанието на сайтът и базата от данни е с отворен код под лиценза GPL.</description>
+    <description lang="en">TheTVDB.com is a TV Scraper. The site is a massive open database that can be modified by anybody and contains full meta data for many shows in different languages. All content and images on the site have been contributed by their users for users and have a high standard or quality. The database schema and website are open source under the GPL.</description>
+    <description lang="de">TheTVDB.com ist ein Scraper für TV-Serien. Die Seite hat eine riesige offene Datenbank, welche von jedem geändert werden kann. Sie enthält weitreichende Meta-Daten für viele TV-Serien in verschiedenen Sprachen. Alle Inhalte und Bilder dieser Seite stammen von User für User und haben eine hohe Qualität. Das Datenbankschema und die Webseite sind OpenSource unter dem GPL-Recht</description>
+    <description lang="es">TheTVDB.com es un scraper para series de televisión. Esta pagina web es una base de datos immensa que puede ser modificada por cualquiera y contiene informaciós de series y capítulos en distintos idiomas. Todo el contenido y las imágenes de este sitio han sido creadas y enviadas por sus usuarios bajo unas estrictas normas de tamaño y calidad. El esquema de la base de datos y la página web són consultables y de código abierto bajo licencia GPL.</description>
+    <description lang="fi">TheTVDB.com on TV-ohjelmatietojen lataaja. Sivusto on massiivinen avoin tietokanta, jonka tietoja kaikki pystyy muokkaamaan ja se sisältää täydet tiedot monista TV-ohjelmista usealla eri kielellä. Kaikki sivuston sisältö ja kuvat on korkealaatuisia ja käyttäjien lahjoittamia. Tietokanta ja sivusto ovat GPL-lisenssin alaisia.</description>
+    <description lang="fr">TheTVDB.com est un scraper TV. Le site est une immense base de données libre qui peut être modifiée par n'importe qui et qui contient toutes les infos pour beaucoup de séries en différentes langues. Toutes les infos et images du site proviennent de contributions d'utilisateurs pour les utilisateurs et sont d'excellente qualité. Le schéma de la base de données et le site Web sont en open source sous licence GPL.</description>
+    <description lang="hu">A TheTVDB.com egy TV műsor leolvasó. Az oldal egy hatalmas adatbázis amit bárki szabadon módosíthat és rengeteg TV műsor adatait tartalmazza különböző nyelveken. A minőségi tartalom és képanyag ezen az oldalon felhasználóktól származik más felhasználók számára. Az adatbázisstruktúra és a weblap nyílt forráskódú a GPL licenc alatt.</description>
+    <description lang="nl">TheTVDB.com is een seriescraper. De site is een gigantische open databank die iedereen kan aanpassen en uitbreiden, en biedt metadata aan voor TV-series in verschillende talen. Alle inhoud en afbeeldingen zijn afkomstig van gebruikers en moeten een grondige kwaliteitscontrole doorstaan. Het databankschema en de websitecode zijn vrijgegeven onder de open source GPL-licentie.</description>
+    <description lang="pl">TheTVDB.com jest scraperem TV. Ten serwis jest ogromną, wielojęzykową i otwartą bazą danych o serialach, którą może edytować każdy. Zawartość tego serwisu została dostarczona przez użytkowników, dla użytkowników. Dostępne materiały mają wysoki standard lub jakość.</description>
+    <description lang="pt"> O TheTVDB.com é um motor de busca para séries de TV. O site é uma gigantesca base de dados aberta que pode ser alterada por qualquer pessoa e contém informação em várias línguas. Todos os conteúdos do site foram enviados por utilizadores com um elevado padrão de qualidade. A base de dados e site funcionam sob uma licença GPL de software livre.</description>
+    <description lang="ru">TheTVDB.com это обработчик для ТВ-шоу. Сайт представляет собой массивную открытую базу данных, которая может быть изменене кем угодно и содержит полные мета-данные для многих шоу и сериалов на различных языках. Все содержанимое и изображения на сайте были выложены его пользователями для пользователей, и имеют высокий уровень или качество. Схемы базы данных и веб-сайт выполнены под открытым исходным кодом и доступны по лицензии GPL.</description>
+    <description lang="se">TVDB.com är en TV-skrapa. Sajten är en massiv öppen databas som kan ändras av vem som helst och innehåller full metadata för mängder av serier på olika språk. Allt innehåll och bilder på sajten har bidragits av användare för användare och har en hög standard eller kvalitet. Databasschemat och webbsidan är licensierat som GPL.</description>
+    <description lang="zh">TheTVDB.com是一个电视刮削器。该网站是一个巨大的开放式数据库，任何人都可以修改，包含多语言的许多电视剧集资料。网站设定了高品质标准，所有图片和内容都由用户提供。数据库结构和网站均在GPL许可下开源。</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.image.google"
+       name="google"
+       version="0.9.2"
+       provider-name="Rick Phillips (ruuk)">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+    <import addon="script.module.simplejson" version="2.0.9"/>
+   </requires>
+
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>image</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Plugin to search and browse google images</summary>
+    <description>Search, view, and save Google Images. Includes advanced search and search history. Note: only 32 images per search - a Google limit.</description>
+	<platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.image.picasa"
+       name="Picasa"
+       version="0.8.8"
+       provider-name="Rick Phillips (ruuk)">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+    <import addon="script.module.elementtree" version="1.2.7"/>
+  </requires>
+
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>image</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Plugin to browse picasa albums and photos/videos</summary>
+    <summary lang="nl">Blader door uw Picasa albums en afbeeldingen van u zelf of uw vrienden.</summary>
+
+    <description lang="en">Browse your picasa albums and tags. Browse your favorite user's albums, tags, and their favorite users. Search your photos/videos, your contact's photos/videos, and search Picasa. View maps of photos with geo location data.</description>
+    <description lang="nl">Blader door uw Picasa albums en afbeeldingen van u zelf of uw vrienden.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.video.cinema.mosfilm.ru"
+       name="[COLOR FF00FF00]Мосфильм ([/COLOR][COLOR FFFFF000]cinema.mosfilm.ru[/COLOR][COLOR FF00FF00])[/COLOR]"
+       version="1.0.2"
+       provider-name="Silen">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+             provides="video"
+             library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Мосфильм (cinema.mosfilm.ru)</summary>
+    <description>Иинтернет-кинотеатр ФГУП «Киноконцерн «Мосфильм» (cinema.mosfilm.ru).</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.4.8" provider-name="ivi.ru (NuisMons)">
+  <requires><import addon="xbmc.python" version="1.0"/></requires>
+  <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
+  <extension point="xbmc.addon.metadata">
+	<language>ru</language>
+    <summary>ivi.ru - cмотри любимые фильмы, сериалы, программы, мультфильмы бесплатно и легально.</summary>
+    <description>Приложение интернет-кинотеатра ivi.ru предоставляет доступ к самой большой бесплатной коллекции лицензионного видео российского интернета.
+С помощью приложения ivi.ru вы можете смотреть фильмы, сериалы, ТВ-программы, мультфильмы в отличном качестве бесплатно и легально.
+Обращаем ваше внимание, что воспроизведение видео возможно только на территории Российской Федерации</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="plugin.video.lapti.tv" name="Lapti.tv" version="0.2.0" provider-name="Lapti.tv">
+  <requires><import addon="xbmc.python" version="1.0"/></requires>
+  <extension point="xbmc.python.pluginsource"  provides="video" library="default.py"><provides>video</provides></extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Онлайн ТВ lapti.tv</summary>
+    <description>С помощью плагина Lapti.tv Вы можете смотреть любимые ТВ каналы и передачи с сайта Lapti.tv</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id='plugin.video.youtube' version='3.2.0' name='YouTube' provider-name='TheCollective'>
+  <requires>
+    <import addon='xbmc.python' version='2.0'/>
+    <import addon='script.module.simplejson' version='2.0.10'/>
+    <import addon='script.common.plugin.cache' version='1.0.0'/>
+    <import addon='script.module.parsedom' version='1.2.0'/>
+    <import addon='script.module.simple.downloader' version='0.9.3'/>
+  </requires>
+  <extension point='xbmc.python.pluginsource' library='default.py'>
+        <provides>video</provides>
+  </extension>
+  <extension point='xbmc.addon.metadata'>
+    <platform>all</platform>
+    <summary lang='en'>YouTube video plugin</summary>
+    <description lang='en'>Plugin that lets you browse and play videos from everybody's favorite video site!</description>
+    <disclaimer lang='en'>Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
+    <summary lang='bg'>Видео добавка за YouTube</summary>
+    <description lang='bg'>Добавката ви позволява да разглеждате и гледате видео клипове от любимия на на всички видео сайт!</description>
+    <disclaimer lang='bg'>Някои части от добавката може да са незаконни в държавата, в която се намирате - моля, проверете местните закони, преди да я инсталирате.</disclaimer>
+  </extension>
+</addon>
+<addon id="plugin.video.zoomby.ru" name="ZOOMBY" version="2.0.1" provider-name="ОАО «ВебТВ»">
+  <requires><import addon="xbmc.python" version="1.0"/></requires>
+  <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Zoomby - пересмотри свой взгляд на телевидение</summary>
+    <description>Приветствуем вас на сайте Zoomby.ru - одном из крупнейших развлекательных порталов российского интернета. Здесь вы можете онлайн, легально и бесплатно смотреть любимые фильмы, сериалы, новости, музыкальные клипы, шоу и другие телевизионные передачи.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="repository.digitalprom" name="DPMC Addons repository" version="0.0.1" provider-name="digitalprom">
+	<extension point="xbmc.addon.repository" name="DPMC Addons repository">
+		<info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml</info>
+		<checksum>http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
+		<datadir zip="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Digitalprom Mediacenter Official Addons Repository</summary>
+		<description>DPMC addons updates and new addons</description>
+		<disclaimer>An official DPMC addons only</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+<addon id='script.common.plugin.cache' version='1.3.0' name='Common plugin cache' provider-name='TheCollective'>
+  <requires>
+    <import addon='xbmc.python' version='2.0'/>
+  </requires>
+  <extension point='xbmc.service' library='default.py' start='startup'>
+  </extension>
+  <extension point='xbmc.addon.metadata'>
+    <platform>all</platform>
+    <summary lang='en'>Common caching api for xbmc plugins.</summary>
+  </extension>
+  <extension point='xbmc.python.module' library='lib' />
+</addon>
+<addon id="script.module.elementtree"
+       name="Elementtree XML parser"
+       version="1.2.7" 
+       provider-name="http://effbot.org/zone/element-index.htm">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id='script.module.parsedom' version='1.2.0' name='Parsedom for xbmc plugins' provider-name='TheCollective'>
+  <requires>
+    <import addon='xbmc.python' version='2.0'/>
+  </requires>
+  <extension point='xbmc.addon.metadata'>
+    <platform>all</platform>
+    <summary lang='en'>Parsedom for xbmc plugins.</summary>
+  </extension>
+  <extension point='xbmc.python.module' library='lib' />
+</addon>
+<addon id='script.module.simple.downloader' version='0.9.3' name='Simple Downloader for xbmc plugins' provider-name='TheCollective'>
+  <requires>
+    <import addon='xbmc.python' version='2.0'/>
+    <import addon='script.common.plugin.cache' version='1.0.0'/>
+    <import addon='script.module.parsedom' version='1.0.0'/>
+  </requires>
+  <extension point='xbmc.service' library="default.py" />
+  <extension point='xbmc.addon.metadata'>
+    <platform>all</platform>
+    <summary lang='en'>Simple downloader for xbmc plugins.</summary>
+  </extension>
+  <extension point='xbmc.python.module' library='lib' />
+</addon>
+<addon id="script.module.simplejson"
+       name="simplejson"
+       version="2.0.10" 
+       provider-name="code.google.com/simplejson">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+  </extension>
+</addon>
+<addon id="script.rss.editor"
+       name="RSS Editor"
+       version="2.0.2"
+       provider-name="rwparris2">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+  </requires>
+  <extension point="xbmc.python.script"
+             library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">A Script for editing XBMC's built in RSS Ticker</summary>
+    <summary lang="hu">RSS forrás szerkesztő</summary> 
+    <summary lang="de">Skript zum Bearbeiten des XBMC internen RSS Tickers</summary>
+    <description lang="en">A Script for editing XBMC's built in RSS Ticker</description>
+    <description lang="hu">A szkript képes szerkeszteni az XBMC beépített RSS forrás készletét</description>
+    <description lang="de">Skript zum Bearbeiten des XBMC internen RSS Tickers</description>
+  </extension>
+</addon>
+
+</addons>
