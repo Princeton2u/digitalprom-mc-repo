@@ -514,7 +514,7 @@ The initial search is always done on MusicBrainz. In case allmusic link is not a
     <platform>all</platform>
   </extension>
 </addon>
-<addon id="repository.digitalprom" name="DPMC Addons repository" version="0.0.1" provider-name="digitalprom">
+<addon id="repository.digitalprom" name="DPMC Addons repository" version="0.0.2" provider-name="digitalprom">
 	<extension point="xbmc.addon.repository" name="DPMC Addons repository">
 		<info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml</info>
 		<checksum>http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
