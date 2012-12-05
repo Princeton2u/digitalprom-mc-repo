@@ -463,7 +463,7 @@ The initial search is always done on MusicBrainz. In case allmusic link is not a
     <platform>all</platform>
   </extension>
 </addon>
-<addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.4.8" provider-name="ivi.ru (NuisMons)">
+<addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.5.1" provider-name="ivi.ru (NuisMons)">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
   <extension point="xbmc.addon.metadata">
