@@ -296,7 +296,7 @@ class YouTubeStorage():
         if key:
             key += "_thumb"
 
-        return key
+        return key.encode("utf-8","ignore")
 
     def _getValueStorageKey(self, params={}, item={}):
         self.common.log(repr(params), 5)
@@ -492,3 +492,31 @@ class YouTubeStorage():
                 results = []
 
         return results
+
+    def updateVideoIdStatusInCache(self, pre_id, ytobjects):
+        self.common.log(pre_id)
+        save_data = {}
+        for item in ytobjects:
+            if "videoid" in item:
+                save_data[item["videoid"]] = repr(item)
+
+        self.cache.setMulti(pre_id, save_data)
+
+    def getVideoIdStatusFromCache(self, pre_id, ytobjects):
+        self.common.log(pre_id)
+        load_data = []
+        for item in ytobjects:
+            if "videoid" in item:
+                load_data.append(item["videoid"])
+
+        res = self.cache.getMulti(pre_id, load_data)
+        if len(res) != len(load_data):
+            self.common.log("Length mismatch:" + repr(res) + " - " + repr(load_data))
+
+        i = 0
+        for item in ytobjects:
+            if "videoid" in item:
+                if i < len(res):
+                    item["Overlay"] = res[i]
+                i += 1 # This can NOT be enumerated because there might be missing videoids
+        return ytobjects

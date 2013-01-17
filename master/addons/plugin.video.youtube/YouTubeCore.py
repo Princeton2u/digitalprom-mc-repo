@@ -232,12 +232,12 @@ class YouTubeCore():
             thumb = ""
             if get("user_feed") == "contacts":
                 folder["thumbnail"] = "user"
-                folder["contact"] = folder["Title"]
+                folder["contact"] = self.common.parseDOM(node, 'yt:username')[0]
                 folder["store"] = "contact_options"
                 folder["folder"] = "true"
 
             if get("user_feed") == "subscriptions":
-                folder["channel"] = folder["Title"]
+                folder["channel"] = self.common.parseDOM(node, 'yt:username')[0]
 
             if get("user_feed") == "playlists":
                 folder['playlist'] = self.common.parseDOM(node, 'yt:playlistId')[0]
@@ -442,15 +442,16 @@ class YouTubeCore():
                 return ret_obj
 
             # This should be a call to self.login._httpLogin()
-            if self.settings.getSetting("login_info") == "":
+            if self.settings.getSetting("login_cookies") == "":
                 if isinstance(self.login, str):
                     self.login = sys.modules["__main__"].login
                 self.login._httpLogin()
 
-            if self.settings.getSetting("login_info") != "":
-                info = self.settings.getSetting("login_info")
-                SID = self.settings.getSetting("SID")
-                cookie += 'LOGIN_INFO=' + info + ';SID=' + SID + ';'
+            if self.settings.getSetting("login_cookies") != "":
+                tcookies = eval(self.settings.getSetting("login_cookies"))
+                self.common.log("Adding login cookies: " + repr(tcookies.keys()))
+                for key in tcookies.keys():
+                    cookie += "%s=%s;" % ( key, tcookies[key])
 
         if get("referer", "false") != "false":
             self.common.log("Added referer: %s" % get("referer"))
@@ -466,9 +467,6 @@ class YouTubeCore():
             con = urllib2.urlopen(request)
 
             inputdata = con.read()
-            #data_type = chardet.detect(inputdata)
-            #inputdata = inputdata.decode(data_type["encoding"])
-            #self.common.log("AAAAAAAAAAAAAAAAAA: " + repr(type(inputdata)) + " - " + repr(data_type))
             ret_obj["content"] = inputdata.decode("utf-8")
             ret_obj["location"] = link
 
@@ -590,10 +588,17 @@ class YouTubeCore():
                 if error[0].find("<") > -1:
                     error[0] = error[0][0:error[0].find("<")]
 
-        if len(error) > 0:
+        if len(error) == 0:
             self.common.log("4")
-            error = error[0]
-            error = urllib.unquote(error[0:error.find("[")]).replace("&#39;", "'")
+            error = self.common.parseDOM(ret['content'], "div", attrs={"id": "watch7-player-age-gate-content"})
+
+        if len(error) > 0:
+            self.common.log("Found error: " + repr(error))
+            error = self.common.stripTags(error[0])
+            self.common.log("Found error: " + repr(error))
+            if error.find("[") > -1:
+                error = error[0:error.find("[")]
+            error = urllib.unquote(error.replace("\n", " ").replace("  ", " ")).replace("&#39;", "'")
             self.common.log("returning error : " + error.strip())
             return error.strip()
 
@@ -643,37 +648,42 @@ class YouTubeCore():
 
         return False
 
-    def _getAuth(self):
+    def performNewLogin(self):
+        self.common.log("")
+        if isinstance(self.login, str):
+            self.login = sys.modules["__main__"].login
+
+        (result, status) = self.login.login()
+
+        if status == 200:
+            self.common.log("returning new auth")
+            return self.settings.getSetting("oauth2_access_token")
+
+        self.common.log("failed because login failed")
+        return False
+
+    def refreshTokenIfNessecary(self):
         now = time.time()
+
         if self.settings.getSetting("oauth2_expires_at"):
             expire_at = float(self.settings.getSetting("oauth2_expires_at"))
         else:
             expire_at = now
 
-        self.common.log("Oauth expires in %s seconds"  % int(expire_at - now))
-
         if expire_at <= now:
+            self.common.log("Oauth expired refreshing")
             self._oRefreshToken()
 
+    def _getAuth(self):
+        self.common.log("")
+
+        self.refreshTokenIfNessecary()
+
         auth = self.settings.getSetting("oauth2_access_token")
-        self.common.log("oauth2_access_token: " + repr(auth), 5)
-
         if (auth):
-            self.common.log("returning stored auth")
             return auth
-        else:
-            if isinstance(self.login, str):
-                self.login = sys.modules["__main__"].login
 
-            (result, status) = self.login.login()
-
-            if status == 200:
-                self.common.log("returning new auth")
-                return self.settings.getSetting("oauth2_access_token")
-
-        self.common.log("failed because login failed")
-
-        return False
+        return self.performNewLogin()
 
     def getVideoId(self, node):
         videoid = "false"
@@ -706,7 +716,7 @@ class YouTubeCore():
         result = False
 
         for state in self.common.parseDOM(node, "yt:state", ret=True):
-        # Ignore unplayable items.
+            # Ignore unplayable items.
             if (state == 'deleted' or state == 'rejected'):
                 result = True
 
@@ -717,9 +727,7 @@ class YouTubeCore():
             if not reason:
                 return result
 
-            if reason[0] == "private":
-                result = True
-            elif reason[0] == 'requesterRegion':
+            if reason[0] in [ "private", 'requesterRegion']:
                 result = True
             elif reason[0] != 'limitedSyndication':
                 self.common.log("removing video, reason: %s value: %s" % (reason[0], value[0]))
@@ -744,7 +752,7 @@ class YouTubeCore():
         if show_next:
             self.utils.addNextFolder(ytobjects, params)
 
-    def setYTCache(self, pre_id, ytobjects):
+    def updateVideoIdStatusInCache(self, pre_id, ytobjects):
         self.common.log(pre_id)
         save_data = {}
         for item in ytobjects:
@@ -753,7 +761,7 @@ class YouTubeCore():
 
         self.cache.setMulti(pre_id, save_data)
 
-    def getYTCache(self, pre_id, ytobjects):
+    def getVideoIdStatusFromCache(self, pre_id, ytobjects):
         self.common.log(pre_id)
         load_data = []
         for item in ytobjects:
@@ -766,7 +774,7 @@ class YouTubeCore():
         i = 0
         for item in ytobjects:
             if "videoid" in item:
-                if res[i]:
+                if i < len(res):
                     item["Overlay"] = res[i]
                 i += 1 # This can NOT be enumerated because there might be missing videoids
         return ytobjects
@@ -797,11 +805,12 @@ class YouTubeCore():
         return result
 
     def getVideoDuration(self, node):
-        result = ""
+        result = 1
 
         for tmp in self.common.parseDOM(node, "yt:duration", ret="seconds"):
-            tmp = int(tmp)
-            result = "%02d:%02d" % (int(tmp / 60), int(tmp % 60))
+            tmp = int(tmp) / 60
+            if tmp:
+                result = tmp
 
         return result
 
@@ -886,8 +895,8 @@ class YouTubeCore():
 
         self.addNextPageLinkIfNecessary(params, xml, ytobjects)
 
-        self.setYTCache("videoidcache", ytobjects)
-        self.getYTCache("vidstatus-", ytobjects)
+        self.updateVideoIdStatusInCache("videoidcache", ytobjects)
+        self.getVideoIdStatusFromCache("vidstatus-", ytobjects)
 
         self.common.log("Done: " + str(len(ytobjects)),3)
         return ytobjects

@@ -21,7 +21,6 @@ import urllib
 import cgi
 try: import simplejson as json
 except ImportError: import json
-import urllib
 
 
 class YouTubePlayer():
@@ -62,6 +61,7 @@ class YouTubePlayer():
         self.xbmcgui = sys.modules["__main__"].xbmcgui
         self.xbmcplugin = sys.modules["__main__"].xbmcplugin
 
+        self.pluginsettings = sys.modules["__main__"].pluginsettings
         self.storage = sys.modules["__main__"].storage
         self.settings = sys.modules["__main__"].settings
         self.language = sys.modules["__main__"].language
@@ -71,6 +71,7 @@ class YouTubePlayer():
         self.utils = sys.modules["__main__"].utils
         self.cache = sys.modules["__main__"].cache
         self.core = sys.modules["__main__"].core
+        self.login = sys.modules["__main__"].login
         self.subtitles = sys.modules["__main__"].subtitles
 
     def playVideo(self, params={}):
@@ -131,6 +132,8 @@ class YouTubePlayer():
 
     def selectVideoQuality(self, params, links):
         get = params.get
+
+        print "links: " + repr(type(links).__name__)
         link = links.get
         video_url = ""
 
@@ -310,22 +313,23 @@ class YouTubePlayer():
 
             for k, v in cgi.parse_qs(data).items():
                 flashvars[k] = v[0]
-
+        self.common.log(u"flashvars: " + repr(flashvars), 2)
         return flashvars
 
     def scrapeWebPageForVideoLinks(self, result, video):
+        self.common.log(u"")
         links = {}
 
         flashvars = self.extractFlashVars(result[u"content"])
         if not flashvars.has_key(u"url_encoded_fmt_stream_map"):
-            return (links, video)
+            return links
 
         if flashvars.has_key(u"ttsurl"):
             video[u"ttsurl"] = flashvars[u"ttsurl"]
 
         for url_desc in flashvars[u"url_encoded_fmt_stream_map"].split(u","):
             url_desc_map = cgi.parse_qs(url_desc)
-
+            self.common.log(u"url_map: " + repr(url_desc_map), 2)
             if not (url_desc_map.has_key(u"url") or url_desc_map.has_key(u"stream")):
                 continue
 
@@ -333,7 +337,12 @@ class YouTubePlayer():
             url = u""
             if url_desc_map.has_key(u"url"):
                 url = urllib.unquote(url_desc_map[u"url"][0])
-            elif url_desc_map.has_key(u"stream"):
+            elif url_desc_map.has_key(u"conn") and url_desc_map.has_key(u"stream"):
+                url = urllib.unquote(url_desc_map[u"conn"][0])
+                if url.rfind("/") < len(url) -1:
+                    url = url + "/"
+                url = url + urllib.unquote(url_desc_map[u"stream"][0])
+            elif url_desc_map.has_key(u"stream") and not url_desc_map.has_key(u"conn"):
                 url = urllib.unquote(url_desc_map[u"stream"][0])
 
             if url_desc_map.has_key(u"sig"):
@@ -343,12 +352,37 @@ class YouTubePlayer():
 
         return links
 
+    def getVideoPageFromYoutube(self, get):
+        login = "false"
+
+        if self.pluginsettings.userHasProvidedValidCredentials():
+            login = "true"
+
+        page = self.core._fetchPage({u"link": self.urls[u"video_stream"] % get(u"videoid"), "login": login})
+
+        if not page:
+            page = {u"status":303}
+
+        return page
+
+    def isVideoAgeRestricted(self, result):
+        error = self.common.parseDOM(result['content'], "div", attrs={"id": "watch7-player-age-gate-content"})
+        self.common.log(repr(error))
+        return len(error) > 0
+
     def extractVideoLinksFromYoutube(self, video, params):
         self.common.log(u"trying website: " + repr(params))
-
         get = params.get
 
-        result = self.core._fetchPage({u"link": self.urls[u"video_stream"] % get(u"videoid")})
+        result = self.getVideoPageFromYoutube(get)
+        if self.isVideoAgeRestricted(result) and self.pluginsettings.userName() != "":
+            self.login.login()
+            result = self.getVideoPageFromYoutube(get)
+
+        if self.isVideoAgeRestricted(result):
+            self.common.log(u"Age restricted video")
+            if not self.pluginsettings.userHasProvidedValidCredentials():
+                self.utils.showMessage(self.language(30600), self.language(30622))
 
         if result[u"status"] != 200:
             self.common.log(u"Couldn't get video page from YouTube")
