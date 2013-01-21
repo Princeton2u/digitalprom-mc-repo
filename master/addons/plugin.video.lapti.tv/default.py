@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
-# Writer (c) 2012, Digitalprom, E-mail: info@digitalprom.ru
+# Writer (c) 2012, Silhouette, E-mail: otaranda@hotmail.com
 # Rev. 0.1.1
 
 
@@ -9,61 +9,60 @@ import urllib,urllib2,re,sys,os,time
 import xbmcplugin,xbmcgui,xbmcaddon
 
 pluginhandle = int(sys.argv[1])
-__addon__       = xbmcaddon.Addon(id='plugin.video.lapti.tv') 
-addon_icon    = __addon__.getAddonInfo('icon')
-addon_icon    = __addon__.getAddonInfo('icon')
-addon_fanart  = __addon__.getAddonInfo('fanart')
-addon_path    = __addon__.getAddonInfo('path')
-addon_type    = __addon__.getAddonInfo('type')
-addon_id      = __addon__.getAddonInfo('id')
-addon_author  = __addon__.getAddonInfo('author')
-addon_name    = __addon__.getAddonInfo('name')
-addon_version = __addon__.getAddonInfo('version')
-
+__addon__       = xbmcaddon.Addon(id='plugin.video.inetcom.tv') 
 #fanart    = xbmc.translatePath( __addon__.getAddonInfo('path') + 'fanart.jpg')
 #xbmcplugin.setPluginFanart(pluginhandle, fanart)
 
-INC_url = 'http://www.lapti.tv'
+INC_url = 'http://lapti.tv'
 INC_ch = '/'
 
-
-try:
-	import platform
-	xbmcver=xbmc.getInfoLabel( "System.BuildVersion" ).replace(' ','_').replace(':','_')
-	UA = 'XBMC/%s (%s; U; %s %s %s %s) %s/%s XBMC/%s'% (xbmcver,platform.system(),platform.system(),platform.release(), platform.version(), platform.machine(),addon_id,addon_version,xbmcver)
-except:
-	UA = 'XBMC/Unknown %s/%s/%s' % (urllib.quote_plus(addon_author), addon_version, urllib.quote_plus(addon_name))
 
 dbg = 1
 def dbg_log(line):
   if dbg: xbmc.log(line)
 
 def get_url(url, data = None, cookie = None, save_cookie = False, referrer = None):
-	try:
-		req = urllib2.Request(url, data, headers = {'User-Agent':UA})
-		resp = urllib2.urlopen(req)
-		http = resp.read()
-		resp.close()
-		return http
-	except Exception, e:
-		dbg_log(e);
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', 'Opera/9.80 (X11; Linux i686; U; ru) Presto/2.7.62 Version/11.00')
+    req.add_header('Accept', 'text/html, application/xml, application/xhtml+xml, */*')
+    req.add_header('Accept-Language', 'ru,en;q=0.9')
+
+    if cookie: req.add_header('Cookie', cookie)
+    if referrer: req.add_header('Referer', referrer)
+    if data: 
+        response = urllib2.urlopen(req, data)
+    else:
+        response = urllib2.urlopen(req)
+    link=response.read()
+
+    if save_cookie:
+        setcookie = response.info().get('Set-Cookie', None)
+        if setcookie:
+            setcookie = re.search('([^=]+=[^=;]+)', setcookie).group(1)
+            link = link + '<cookie>' + setcookie + '</cookie>'
+
+    response.close()
+    return link
+
         
 def INC_prls(url):
     dbg_log('INC_prls')
     
     http = get_url(url)
     oneline = re.sub('[\r\n\t]', ' ', http)
-    ch_cont = re.compile('<div class="channels-block"> +?<ul> +?(.+?) +?</ul> +?</div>').findall(oneline)
+    ch_cont = re.compile('<div class="ch-wrappers ch-center"> +?<ul> +?(.+?) +?</ul> +?</div>').findall(oneline)
     pr_ls = re.compile('<a class="(.+?)" +?href="(.+?)"></a>').findall(ch_cont[0])
 
     if len(pr_ls):
         for descr, href in pr_ls:
             name = descr
+            dbg_log(name)
             item = xbmcgui.ListItem(name)
             uri = sys.argv[0] + '?mode=PLAY'
             uri += '&url='+urllib.quote_plus(INC_url + href)
             item.setInfo( type='video', infoLabels={'title': name, 'plot': descr})
             item.setProperty('IsPlayable', 'true')
+            dbg_log(uri)
             xbmcplugin.addDirectoryItem(pluginhandle, uri, item)
 
     xbmcplugin.endOfDirectory(pluginhandle)    
@@ -76,6 +75,7 @@ def INC_play(url, name, thumbnail, plot, mycookie):
     if len(lnks_ls):
         item = xbmcgui.ListItem(path = 'http://' + lnks_ls[0] + '/playlist.m3u8')
         xbmcplugin.setResolvedUrl(pluginhandle, True, item)
+             
    
 def get_params():
     param=[]

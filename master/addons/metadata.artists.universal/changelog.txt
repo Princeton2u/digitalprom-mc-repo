@@ -1,3 +1,24 @@
+[B]2.4.3[/B]
+Disable last.fm options because last.fm suspended XBMC's API account
+
+[B]2.4.2[/B]
+Updated language files from Transifex
+
+[B]2.4.1[/B]
+Updated language files from Transifex
+
+[B]2.4.0[/B]
+Re-enable fanart.tv scraping by default
+
+[B]2.3.0[/B]
+Added: Scraping artist thumbs and fanarts from theaudiodb.com
+
+[B]2.2.0[/B]
+Added back fanart.tv scraping via JSON API. Still off by default.
+
+[B]2.1.9[/B]
+Temporarily disable fanarttv.com scraping due to site load issues
+
 [B]2.1.8[/B]
 Fixed: Scraper now works with both API layouts
 
