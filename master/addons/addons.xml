@@ -730,7 +730,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.4.8" provider-name="ivi.ru (NuisMons)">
+<addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.5.1" provider-name="ivi.ru (NuisMons)">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
   <extension point="xbmc.addon.metadata">
@@ -743,7 +743,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.lapti.tv" name="Lapti.tv" version="0.1.1" provider-name="Digitalprom">
+<addon id="plugin.video.lapti.tv" name="Lapti.tv" version="0.1.2" provider-name="Digitalprom">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource"  provides="video" library="default.py"><provides>video</provides></extension>
   <extension point="xbmc.addon.metadata">
@@ -876,7 +876,7 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   </extension>
 </addon>
 
-<addon id="plugin.video.zoomby.ru" name="ZOOMBY" version="2.0.1" provider-name="ОАО «ВебТВ»">
+<addon id="plugin.video.zoomby.ru" name="ZOOMBY" version="2.0.2" provider-name="ОАО «ВебТВ»">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
   <extension point="xbmc.addon.metadata">
