@@ -2,10 +2,10 @@
 <addons>
 <addon id="metadata.album.universal"
        name="Universal Album Scraper"
-       version="1.7.0"
+       version="1.7.3"
        provider-name="Olympia, Team XBMC">
   <requires>
-    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="xbmc.metadata" version="2.1.0"/>
     <import addon="metadata.common.last.fm" version="1.5.1"/>
     <import addon="metadata.common.allmusic.com" version="2.5.2"/>
     <import addon="metadata.common.musicbrainz.org" version="1.2.3"/>
@@ -89,10 +89,10 @@
 
 <addon id="metadata.artists.universal"
        name="Universal Artist Scraper"
-       version="2.6.0"
+       version="2.6.3"
        provider-name="Olympia, Team XBMC">
   <requires>
-    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="xbmc.metadata" version="2.1.0"/>
     <import addon="metadata.common.last.fm" version="1.6.0"/>
     <import addon="metadata.common.allmusic.com" version="2.6.0"/>
     <import addon="metadata.common.musicbrainz.org" version="1.3.0"/>
@@ -453,10 +453,10 @@
 
 <addon id="metadata.common.themoviedb.org"
        name="The Movie Database Scraper Library"
-       version="2.9.2"
+       version="2.9.3"
        provider-name="Team XBMC">
   <requires>
-    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="xbmc.metadata" version="2.1.0"/>
   </requires>
   <extension point="xbmc.metadata.scraper.library"
              library="tmdb.xml"/>
@@ -585,10 +585,10 @@
 
 <addon id="metadata.tvdb.com"
        name="The TVDB"
-       version="1.4.5"
+       version="1.5.2"
        provider-name="Team XBMC">
   <requires>
-    <import addon="xbmc.metadata" version="1.0"/>
+    <import addon="xbmc.metadata" version="2.1.0"/>
   </requires>
   <extension point="xbmc.metadata.scraper.tvshows"
              language="multi"
@@ -753,13 +753,13 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.youtube" name="YouTube" provider-name="TheCollective" version="3.4.2">
+<addon id="plugin.video.youtube" name="YouTube" provider-name="TheCollective" version="4.4.4">
   <requires>
-    <import addon="xbmc.python" version="2.0" />
+    <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.simplejson" version="2.0.10" />
-    <import addon="script.common.plugin.cache" version="1.5.1" />
-    <import addon="script.module.parsedom" version="1.5.1" />
-    <import addon="script.module.simple.downloader" version="0.9.4" />
+    <import addon="script.common.plugin.cache" version="2.5.1" />
+    <import addon="script.module.parsedom" version="2.5.1" />
+    <import addon="script.module.simple.downloader" version="1.9.4" />
   </requires>
   <extension library="default.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
@@ -900,9 +900,9 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
 	</extension>
 </addon>
 
-<addon id="script.common.plugin.cache" name="Common plugin cache" provider-name="TheCollective" version="1.5.1">
+<addon id="script.common.plugin.cache" name="Common plugin cache" provider-name="TheCollective" version="2.5.1">
   <requires>
-    <import addon="xbmc.python" version="2.0" />
+    <import addon="xbmc.python" version="2.1.0" />
   </requires>
   <extension library="default.py" point="xbmc.service" start="startup">
   </extension>
@@ -927,9 +927,9 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   </extension>
 </addon>
 
-<addon id="script.module.parsedom" name="Parsedom for xbmc plugins" provider-name="TheCollective" version="1.5.1">
+<addon id="script.module.parsedom" name="Parsedom for xbmc plugins" provider-name="TheCollective" version="2.5.1">
   <requires>
-    <import addon="xbmc.python" version="2.0" />
+    <import addon="xbmc.python" version="2.1.0" />
   </requires>
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
@@ -938,11 +938,11 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   <extension library="lib" point="xbmc.python.module" />
 </addon>
 
-<addon id="script.module.simple.downloader" name="Simple Downloader for xbmc plugins" provider-name="TheCollective" version="0.9.4">
+<addon id="script.module.simple.downloader" name="Simple Downloader for xbmc plugins" provider-name="TheCollective" version="1.9.4">
   <requires>
-    <import addon="xbmc.python" version="2.0" />
-    <import addon="script.common.plugin.cache" version="1.5.0" />
-    <import addon="script.module.parsedom" version="1.5.1" />
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.common.plugin.cache" version="2.5.0" />
+    <import addon="script.module.parsedom" version="2.5.1" />
   </requires>
   <extension library="default.py" point="xbmc.service" />
   <extension point="xbmc.addon.metadata">
@@ -984,5 +984,27 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
     <description lang="hu">A szkript képes szerkeszteni az XBMC beépített RSS forrás készletét</description>
     <description lang="de">Skript zum Bearbeiten des XBMC internen RSS Tickers</description>
   </extension>
+</addon>
+
+<addon id="xbmc.addon" version="12.0.0" provider-name="Team XBMC">
+  <backwards-compatibility abi="12.0"/>
+  <requires>
+    <import addon="xbmc.core" version="0.1.0"/>
+  </requires>
+  <extension-point id="metadata" schema="metadata.xsd"/>
+  <extension-point id="repository" schema="repository.xsd"/>
+</addon>
+
+<addon id="xbmc.python" version="2.1.0" provider-name="Team XBMC">
+  <backwards-compatibility abi="1.0"/>
+  <requires>
+    <import addon="xbmc.core" version="0.1.0"/>
+  </requires>
+  <extension-point id="script" schema="script.xsd"/>
+  <extension-point id="subtitles" schema="script.xsd"/>
+  <extension-point id="lyrics" schema="script.xsd"/>
+  <extension-point id="weather" schema="script.xsd"/>
+  <extension-point id="library" schema="script.xsd"/>
+  <extension-point id="plugin" schema="pluginsource.xsd"/>
 </addon>
 </addons>

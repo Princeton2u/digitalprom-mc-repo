@@ -29,7 +29,7 @@ class SimpleDownloader():
     dialog = u""
 
     def __init__(self):
-        self.version = u"0.9.4"
+        self.version = u"1.9.4"
         self.plugin = u"SimpleDownloader-" + self.version
 
         if hasattr(sys.modules["__main__"], "common"):
