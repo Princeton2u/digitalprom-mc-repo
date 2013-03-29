@@ -842,14 +842,14 @@
   </extension>
 </addon>
 
-<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.0.1" provider-name="digitalprom">
+<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.1.0" provider-name="digitalprom">
 	<requires>
 		<import addon="xbmc.addon" version="12.9.2"/>
 	</requires>
 	<extension point="xbmc.addon.repository" name="DPMC Addons repository">
-		<info compressed="false">http://code.google.com/p/digitalprom-mc-repo/source/browse/devel/addons.xml</info>
-		<checksum>http://code.google.com/p/digitalprom-mc-repo/source/browse/devel/addons.xml.md5</checksum>
-		<datadir zip="false">http://code.google.com/p/digitalprom-mc-repo/source/browse/devel/addons</datadir>
+		<info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/devel/addons/addons.xml</info>
+		<checksum>http://digitalprom-mc-repo.googlecode.com/git/devel/addons/addons.xml.md5</checksum>
+		<datadir zip="false">http://digitalprom-mc-repo.googlecode.com/git/devel/addons</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Digitalprom Mediacenter Official Addons Repository Development</summary>
