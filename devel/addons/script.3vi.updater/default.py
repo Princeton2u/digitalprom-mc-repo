@@ -57,16 +57,19 @@ def uriFactory(args):
 	return '%s?%s' % (fhos, urllib.urlencode(args))
 
 def initScreen(args):
-	li = xbmcgui.ListItem(language(30014), iconImage = AddonIcon, thumbnailImage = AddonIcon)
-	uri = construct_request({
-		'action': 'update',
-		'url': 'http://code.google.com/p/digitalprom-mc-repo/downloads/detail?name=DPMC-ION.i386-2012-1212-r0001.zip&can=2&q='
-	})
-	li.setProperty('fanart_image', AddonFanart)
-	xbmcplugin.addDirectoryItem(hos, uri, li, True)
+#	li = xbmcgui.ListItem(language(30014), iconImage = AddonIcon, thumbnailImage = AddonIcon)
+#	uri = construct_request({
+#		'action': 'update',
+#		'url': 'http://code.google.com/p/digitalprom-mc-repo/downloads/detail?name=DPMC-ION.i386-2012-1212-r0001.zip&can=2&q='
+#	})
+#	li.setProperty('fanart_image', AddonFanart)
+#	xbmcplugin.addDirectoryItem(hos, uri, li, True)
 
-	xbmcplugin.endOfDirectory(hos)
-	
+#	xbmcplugin.endOfDirectory(hos)
+	u = urllib2.urlopen('http://digitalprom-mc-repo.googlecode.com/files/repository.xbmc.org.zip')
+	localFile = open('/storage/.update/repository.xbmc.org.zip', 'w')
+	localFile.write(u.read())
+	localFile.close()	
 
 def main():
 
@@ -87,6 +90,7 @@ def main():
 		if paction: paction(args)
 
 if (__name__ == '__main__' ):
+	print( 'len(sys.argv) = %s' % len(sys.argv));
 	print( 'sys.argv = %s' % sys.argv[1]);
 #	hos = int(sys.argv[1])
 	fhos = sys.argv[0]
