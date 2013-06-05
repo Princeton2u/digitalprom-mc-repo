@@ -12,8 +12,8 @@ import xbmcgui
 import xbmc
 import xbmcaddon
 import time
-import random
-import threading
+import traceback
+import zipfile
 
 Addon         = xbmcaddon.Addon(id='script.3vi.updater')
 AddonLanguage      = Addon.getLocalizedString
@@ -26,61 +26,107 @@ AddonAuthor  = Addon.getAddonInfo('author')
 AddonName    = Addon.getAddonInfo('name')
 AddonVersion = Addon.getAddonInfo('version')
 
-def getArgs(paramstring):
-	param=[]
-	if len(paramstring)>=2:
-		params=paramstring
-		cleanedparams=params.replace('?','')
-		if (params[len(params)-1]=='/'):
-			params=params[0:len(params)-2]
-		pairsofparams=cleanedparams.split('&')
-		param={}
-		for i in range(len(pairsofparams)):
-			splitparams={}
-			splitparams=pairsofparams[i].split('=')
-			if (len(splitparams))==2:
-				param[splitparams[0]]=splitparams[1]
-	if len(param) > 0:
-		for cur in param:
-			param[cur] = urllib.unquote_plus(param[cur])
-	return param
+def error_logging():
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    lines = traceback.format_exception(exc_type, exc_value, exc_traceback) 
+    xbmc.log(''.join('!! ' + line for line in lines))
 
-def showToastMessage(heading, message, timeout = 3000, icon = AddonIcon):
-	try: xbmc.executebuiltin('XBMC.Notification("%s", "%s", %s, "%s")' % (heading.encode('utf-8'), message.encode('utf-8'), timeout, icon.encode('utf-8')))
-	except Exception, e:
-		print( '[%s]: showToastMessage: Transcoding UTF-8 failed [%s]' % (addon_id, e), 2 )
-		try: xbmc.executebuiltin('XBMC.Notification("%s", "%s", %s, "%s")' % (heading, message, timeout, icon))
-		except Exception, e:
-			print( '[%s]: showToastMessage: exec failed [%s]' % (addon_id, e), 3 )
-
-def uriFactory(args):
-	return '%s?%s' % (fhos, urllib.urlencode(args))
+## downloader with a progress bar
+def Downloader(url,dest,description,heading):
+    dp = xbmcgui.DialogProgress()
+    dp.create(heading,description)
+    dp.update(1)
+    
+    # Remove old file when present
+    if os.path.isfile(dest):
+        os.remove(dest)
+        
+    try:
+        old_percent=0
+        
+        # Init download
+        u = urllib2.urlopen(url)            
+        
+        # Open file for writing
+        f = open(dest,'wb')
+        
+        # Calculate the download total length
+        meta = u.info()
+        file_size = int(meta.getheaders("Content-Length")[0])
+        file_size_dl = 0
+        block_sz = 8192
+        
+        # Download it, update progress every block_sz bytes
+        while True:
+        
+            buffer = u.read(block_sz)
+            
+            # Download finished
+            if not buffer:
+                break
+            
+            file_size_dl += len(buffer)
+            f.write(buffer)
+            percent = file_size_dl * 100 / file_size
+            
+            # Update percentage only when needed (faster, dialog update is slow)
+            if int(percent) - int(old_percent) >= 1:
+                dp.update(percent)
+                old_percent=percent
+            
+            # Check if the download was cancelled
+            if (dp.iscanceled()):
+                dp.close()
+                return -9
+                break
+        
+        dp.update(100)
+        f.close()
+        return 0
+    except urllib2.URLError, e:
+        xbmc.log("Failed to download nightly release. Error: %s" % (e.reason))
+        error_logging()
+        return -1
+    except urllib2.HTTPError, e:
+        xbmc.log("Failed to download nightly release. Error: %s" % (e.code))
+        error_logging()
+        return -1
+    except KeyboardInterrupt,SystemExit:
+        dp.close()
+        return -9
 
 def initScreen(args):
-#	li = xbmcgui.ListItem(language(30014), iconImage = AddonIcon, thumbnailImage = AddonIcon)
-#	uri = construct_request({
-#		'action': 'update',
-#		'url': 'http://code.google.com/p/digitalprom-mc-repo/downloads/detail?name=DPMC-ION.i386-2012-1212-r0001.zip&can=2&q='
-#	})
-#	li.setProperty('fanart_image', AddonFanart)
-#	xbmcplugin.addDirectoryItem(hos, uri, li, True)
-
-#	xbmcplugin.endOfDirectory(hos)
 	u = urllib2.urlopen('http://digitalprom-mc-repo.googlecode.com/files/repository.xbmc.org.zip')
-	localFile = open('/storage/.update/repository.xbmc.org.zip', 'w')
-	localFile.write(u.read())
-	localFile.close()	
+	if xbmcgui.Dialog().yesno("Загрузка обновлений", "Загрузить новую прошивку?"):
+		if os.path.isdir('/storage/.update/') != True:
+			os.makedirs('/storage/.update/')
+		if Downloader('http://digitalprom-mc-repo.googlecode.com/files/firmware.zip', '/storage/.update/firmware.zip', 'Не выключайте и не перезагружайте устройство,\nпока прошивка не скачается.', 'Подождите, идет загрузка. Выполнено ') == 0:
+			zipdata = zipfile.ZipFile('/storage/.update/firmware.zip')
+			zipinfos = zipdata.infolist()
+			dp = xbmcgui.DialogProgress()
+			dp.create('Подождите, идет распаковка. Выполнено ', 'Не выключайте и не перезагружайте устройство,\nпока прошивка не распакуется.')
+			dp.update(1)
+			i = 0;
+			for zipinfo in zipinfos:
+				i += 1
+				zipdata.extract(zipinfo, '/storage/.update/')
+				dp.update(25 * i)
+			zipdata.close()
+			os.remove('/storage/.update/firmware.zip')
+			dp.close()
+			xbmc.restart()
 
 def main():
 
-	args = getArgs(sys.argv[2])
+#	args = getArgs(sys.argv[2])
 	try:
 		action = args['action']
 		del args['action']
 	except:
 		action = None
 		print( '%s: Initializing addon... ' % AddonId, 1 )
-		initScreen(args)
+#		initScreen(args)
+		initScreen(None)
 	if action != None:
 		try: paction = globals()[action]
 		except:
@@ -90,9 +136,9 @@ def main():
 		if paction: paction(args)
 
 if (__name__ == '__main__' ):
-	print( 'len(sys.argv) = %s' % len(sys.argv));
-	print( 'sys.argv = %s' % sys.argv[1]);
+#	print( 'len(sys.argv) = %s' % len(sys.argv));
+#	print( 'sys.argv = %s' % sys.argv[1]);
 #	hos = int(sys.argv[1])
-	fhos = sys.argv[0]
+#	fhos = sys.argv[0]
 	main()
 

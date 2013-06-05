@@ -2,7 +2,7 @@
 <addons>
 <addon id="metadata.album.universal"
        name="Universal Album Scraper"
-       version="2.0.0"
+       version="1.7.7b"
        provider-name="Olympia, Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -103,7 +103,7 @@
 
 <addon id="metadata.artists.universal"
        name="Universal Artist Scraper"
-       version="3.0.0"
+       version="2.6.6b"
        provider-name="Olympia, Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -245,6 +245,64 @@
   </extension>
 </addon>
 
+<addon id="metadata.common.amazon.de"
+       name="Amazon.de"
+       version="1.0.0"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="amazonde.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="en">amazon.de Scraper Library</summary>
+    <description lang="en">Download Music information from amazon.de</description>
+  </extension>
+</addon>
+
+<addon id="metadata.common.fanart.tv"
+       name="fanart.tv"
+       version="2.1.2"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="fanarttv.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на инф. от fanart.tv</summary>
+    <summary lang="en">fanart.tv Scraper Library</summary>
+    <summary lang="de">Scraper für Hintergründe von fanart.tv</summary>
+    <summary lang="es">Scraper de fanart.tv</summary>
+    <summary lang="fi">fanart.tv taustakuvalataajan kirjasto</summary>
+    <summary lang="fr">Scraper fanart.tv</summary>
+    <summary lang="hu">fanart.tv leolvasó-könyvtár</summary>
+    <summary lang="nl">fanart.tv-scraperfuncties</summary>
+    <summary lang="pl">Scraper biblioteki fanart.tv</summary>
+    <summary lang="pt">Biblioteca de fundos fanart.tv</summary>
+    <summary lang="ru">Обработчик Фоновых изображений с fanart.tv</summary>
+    <summary lang="se">Skrapa för fanart.tv</summary>
+    <summary lang="zh">fanart.tv刮削器代码库</summary>
+    <description lang="bg">Сваля декорации от www.fanart.tv.com</description>
+    <description lang="en">Download backdrops from www.fanart.tv.com</description>
+    <description lang="de">Downloade Hintergründe von www.fanart.tv.com</description>
+    <description lang="es">Descarga fanart y fotos de artistas de www.fanart.tv.com</description>
+    <description lang="fi">Lataa taustakuvia osoitteesta www.fanart.tv.com</description>
+    <description lang="fr">Télécharge les backdrops depuis www.htbackgrops.com</description>
+    <description lang="hu">Fanartképek letöltése www.fanart.tv.com webhelyről</description>
+    <description lang="nl">Achtergronden ophalen van www.fanart.tv.com</description>
+    <description lang="pl">Pobieraj tła z www.fanart.tv.com</description>
+    <description lang="pt">Descarregar fundos de www.fanart.tv.com</description>
+    <description lang="ru">Загружать фоновые изображения с www.fanart.tv.com</description>
+    <description lang="se">Ladda ner bakgrundsbilder från www.fanart.tv.com</description>
+    <description lang="zh">从www.fanart.tv.com下载背景图</description>
+  </extension>
+</addon>
+
 <addon id="metadata.common.hdtrailers.net"
        name="HD-Trailers common scraper functions"
        version="1.0.9"
@@ -277,6 +335,47 @@
     <description lang="zh">从www.hd-trailers.net下载电影预告片</description>
     <minversion>20000</minversion>
     <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="metadata.common.htbackdrops.com"
+       name="HTBackdrops"
+       version="1.2.0"
+       provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="htbackdrops.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <minversion>20000</minversion>
+    <summary lang="bg">Библиотека за сваляне на инф. от HTBackdrops</summary>
+    <summary lang="en">HTBackdrops Scraper Library</summary>
+    <summary lang="de">Scraper für Hintergründe von HTBackdrops</summary>
+    <summary lang="es">Scraper de HTBackdrops</summary>
+    <summary lang="fi">HTBackdrops taustakuvalataajan kirjasto</summary>
+    <summary lang="fr">Scraper HTBackdrops</summary>
+    <summary lang="hu">HTBackdrops leolvasó-könyvtár</summary>
+    <summary lang="nl">HTBackdrops-scraperfuncties</summary>
+    <summary lang="pl">Scraper biblioteki HTBackdrops</summary>
+    <summary lang="pt">Biblioteca de fundos HTBackdrops</summary>
+    <summary lang="ru">Обработчик Фоновых изображений с HTBackdrops</summary>
+    <summary lang="se">Skrapa för HTBackdrops</summary>
+    <summary lang="zh">HTBackdrops刮削器代码库</summary>
+    <description lang="bg">Сваля декорации от www.htbackdrops.com</description>
+    <description lang="en">Download backdrops from www.htbackdrops.com</description>
+    <description lang="de">Downloade Hintergründe von www.htbackdrops.com</description>
+    <description lang="es">Descarga fanart y fotos de artistas de www.htbackdrops.com</description>
+    <description lang="fi">Lataa taustakuvia osoitteesta www.htbackdrops.com</description>
+    <description lang="fr">Télécharge les backdrops depuis www.htbackgrops.com</description>
+    <description lang="hu">Fanartképek letöltése www.htbackdrops.com webhelyről</description>
+    <description lang="nl">Achtergronden ophalen van www.htbackdrops.com</description>
+    <description lang="pl">Pobieraj tła z www.htbackdrops.com</description>
+    <description lang="pt">Descarregar fundos de www.htbackdrops.com</description>
+    <description lang="ru">Загружать фоновые изображения с www.htbackdrops.com</description>
+    <description lang="se">Ladda ner bakgrundsbilder från www.htbackdrops.com</description>
+    <description lang="zh">从www.htbackdrops.com下载背景图</description>
   </extension>
 </addon>
 
@@ -356,7 +455,7 @@
 
 <addon id="metadata.common.musicbrainz.org"
        name="musicbrainz"
-        version="2.0.0"
+        version="1.3.1b"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -399,7 +498,7 @@
 
 <addon id="metadata.common.theaudiodb.com"
        name="TheAudioDb Common Scraper Functions"
-       version="1.6.2"
+       version="1.6.1"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -1019,7 +1118,7 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
 
 <addon id="script.3vi.updater"
 	name="3vi Updater"
-	version="0.0.1"
+	version="1.0.1"
 	provider-name="Digitalprom">
 
 	<requires>
@@ -1534,6 +1633,12 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   <extension-point id="scraper.musicvideos" schema="scraper.xsd"/>
   <extension-point id="scraper.tvshows" schema="scraper.xsd"/>
   <extension-point id="scraper.library" schema="scraper.xsd"/>
+</addon>
+
+<addon id="xbmc.pvr" version="1.7.0" provider-name="Team XBMC">
+  <requires>
+    <import addon="xbmc.core" version="0.1.0"/>
+  </requires>
 </addon>
 
 <addon id="xbmc.python" version="2.1.0" provider-name="Team XBMC">

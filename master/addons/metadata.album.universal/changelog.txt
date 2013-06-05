@@ -1,7 +1,3 @@
-[B]2.0.0[/B]
-Added: ResolveIDToUrl
-Fixed: album won't find some times (thanks and credits to crankylemur & ezechiel1917)
-
 [B]1.7.6[/B]
 Updated language files from Transifex
 
