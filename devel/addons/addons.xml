@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="plugin.video.lapti.tv" name="Lapti.tv" version="0.1.2" provider-name="Digitalprom">
+  <requires><import addon="xbmc.python" version="1.0"/></requires>
+  <extension point="xbmc.python.pluginsource"  provides="video" library="default.py"><provides>video</provides></extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Online TV from lapti.tv</summary>
+    <description>Online TV from lapti.tv</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="script.3vi.updater"
 	name="3vi Updater"
 	version="1.0.1"
