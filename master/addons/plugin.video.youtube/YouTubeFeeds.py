@@ -69,7 +69,10 @@ class YouTubeFeeds():
     def createUrl(self, params={}):
         self.common.log("", 4)
         get = params.get
-        time = "this_week"
+        timed=int(self.settings.getSetting('timedata'))
+        times=['today','this_week','this_month','all_time']
+        time = times[timed]
+        print time
         per_page = self.pluginsettings.itemsPerPage()
         region = self.pluginsettings.currentRegion()
 

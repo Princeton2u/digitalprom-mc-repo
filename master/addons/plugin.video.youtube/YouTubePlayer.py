@@ -22,6 +22,8 @@ import cgi
 try: import simplejson as json
 except ImportError: import json
 
+import urllib2, re
+
 class YouTubePlayer():
     fmt_value = {
         5: "240p h263 flv container",
@@ -50,6 +52,9 @@ class YouTubePlayer():
         121: "hd1080"
         }
 
+    # MAX RECURSION Depth for security
+    MAX_REC_DEPTH = 5
+
     # YouTube Playback Feeds
     urls = {}
     urls['video_stream'] = "http://www.youtube.com/watch?v=%s&safeSearch=none"
@@ -72,6 +77,9 @@ class YouTubePlayer():
         self.core = sys.modules["__main__"].core
         self.login = sys.modules["__main__"].login
         self.subtitles = sys.modules["__main__"].subtitles
+        
+        self.algoCache = {}
+        self._cleanTmpVariables()
 
     def playVideo(self, params={}):
         self.common.log(repr(params), 3)
@@ -93,6 +101,7 @@ class YouTubePlayer():
         self.xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=True, listitem=listitem)
 
         if self.settings.getSetting("lang_code") != "0" or self.settings.getSetting("annotations") == "true":
+            self.common.log("BLAAAAAAAAAAAAAAAAAAAAAA: " + repr(self.settings.getSetting("lang_code")))
             self.subtitles.addSubtitles(video)
 
         if (get("watch_later") == "true" and get("playlist_entry_id")):
@@ -214,7 +223,7 @@ class YouTubePlayer():
             self.common.log(u"- construct_video_url failed, video_url not set")
             return video_url
 
-        if get("action") != "download":
+        if get("action") != "download" and video_url.find("rtmp") == -1:
             video_url += '|' + urllib.urlencode({'User-Agent':self.common.USERAGENT})
 
         self.common.log(u"Done")
@@ -254,15 +263,16 @@ class YouTubePlayer():
     def checkForErrors(self, video):
         status = 200
 
-        if video[u"video_url"] == u"":
+        if "video_url" not in video or video[u"video_url"] == u"":
             status = 303
-            vget = video.get
-            if vget(u"live_play"):
-                video[u'apierror'] = self.language(30612)
-            elif vget(u"stream_map"):
-                video[u'apierror'] = self.language(30620)
-            else:
-                video[u'apierror'] = self.language(30618)
+            if u"apierror" not in video:
+                vget = video.get
+                if vget(u"live_play"):
+                    video[u'apierror'] = self.language(30612)
+                elif vget(u"stream_map"):
+                    video[u'apierror'] = self.language(30620)
+                else:
+                    video[u'apierror'] = self.language(30618)
 
         return (video, status)
 
@@ -282,7 +292,12 @@ class YouTubePlayer():
 
         (links, video) = self.extractVideoLinksFromYoutube(video, params)
 
-        video[u"video_url"] = self.selectVideoQuality(params, links)
+        if len(links) != 0:
+            video[u"video_url"] = self.selectVideoQuality(params, links)
+        elif "hlsvp" in video:
+            #hls selects the quality based on available bitrate (adaptive quality), no need to select it here
+            video[u"video_url"] = video[u"hlsvp"]
+            self.common.log("Using hlsvp url %s" % video[u"video_url"])
 
         (video, status) = self.checkForErrors(video)
 
@@ -290,7 +305,14 @@ class YouTubePlayer():
 
         return (video, status)
 
-    def extractFlashVars(self, data):
+    def removeAdditionalEndingDelimiter(self, data):
+        pos = data.find("};")
+        if pos != -1:
+            self.common.log(u"found extra delimiter, removing")
+            data = data[:pos + 1]
+        return data
+
+    def extractFlashVars(self, data, assets):
         flashvars = {}
         found = False
 
@@ -303,10 +325,15 @@ class YouTubePlayer():
                     continue
                 data = line[p1 + 1:p2]
                 break
+        data = self.removeAdditionalEndingDelimiter(data)
 
         if found:
             data = json.loads(data)
-            flashvars = data["args"]
+            if assets:
+                flashvars = data["assets"]
+            else:
+                flashvars = data["args"]
+        self.common.log("Step2: " + repr(data))
 
         self.common.log(u"flashvars: " + repr(flashvars), 2)
         return flashvars
@@ -315,9 +342,12 @@ class YouTubePlayer():
         self.common.log(u"")
         links = {}
 
-        flashvars = self.extractFlashVars(result[u"content"])
+        flashvars = self.extractFlashVars(result[u"content"], 0)
         if not flashvars.has_key(u"url_encoded_fmt_stream_map"):
             return links
+
+        if flashvars.has_key(u"ttsurl"):
+            video[u"ttsurl"] = flashvars[u"ttsurl"]
 
         if flashvars.has_key(u"ttsurl"):
             video[u"ttsurl"] = flashvars[u"ttsurl"]
@@ -342,10 +372,164 @@ class YouTubePlayer():
 
             if url_desc_map.has_key(u"sig"):
                 url = url + u"&signature=" + url_desc_map[u"sig"][0]
+            elif url_desc_map.has_key(u"s"):
+                sig = url_desc_map[u"s"][0]
+                flashvars = self.extractFlashVars(result[u"content"], 1)
+                js = flashvars[u"js"]
+                url = url + u"&signature=" + self.decrypt_signature(sig, js)
 
             links[key] = url
 
         return links
+
+    @staticmethod
+    def printDBG(s):
+        print(s)
+
+    def _cleanTmpVariables(self):
+        self.fullAlgoCode = ''
+        self.allLocalFunNamesTab = []
+        self.playerData = ''
+
+    def _jsToPy(self, jsFunBody):
+        pythonFunBody = jsFunBody.replace('function', 'def').replace('{', ':\n\t').replace('}', '').replace(';', '\n\t').replace('var ', '')
+        pythonFunBody = pythonFunBody.replace('.reverse()', '[::-1]')
+
+        lines = pythonFunBody.split('\n')
+        for i in range(len(lines)):
+            # a.split("") -> list(a)
+            match = re.search('(\w+?)\.split\(""\)', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), 'list(' + match.group(1)  + ')')
+            # a.length -> len(a)
+            match = re.search('(\w+?)\.length', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), 'len(' + match.group(1)  + ')')
+            # a.slice(3) -> a[3:]
+            match = re.search('(\w+?)\.slice\(([0-9]+?)\)', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), match.group(1) + ('[%s:]' % match.group(2)) )
+            # a.join("") -> "".join(a)
+            match = re.search('(\w+?)\.join\(("[^"]*?")\)', lines[i])
+            if match:
+                lines[i] = lines[i].replace( match.group(0), match.group(2) + '.join(' + match.group(1) + ')' )
+        return "\n".join(lines)
+
+    def _getLocalFunBody(self, funName):
+        # get function body
+        match = re.search('(function %s\([^)]+?\){[^}]+?})' % funName, self.playerData)
+        if match:
+            # return jsFunBody
+            return match.group(1)
+        return ''
+
+    def _getAllLocalSubFunNames(self, mainFunBody):
+        match = re.compile('[ =(,](\w+?)\([^)]*?\)').findall( mainFunBody )
+        if len(match):
+            # first item is name of main function, so omit it
+            funNameTab = set( match[1:] )
+            return funNameTab
+        return set()
+
+    def decrypt_signature(self, s, playerUrl):
+        self.printDBG("decrypt_signature sign_len[%d] playerUrl[%s]" % (len(s), playerUrl) )
+
+        # clear local data
+        self._cleanTmpVariables()
+
+        # use algoCache
+        if playerUrl not in self.algoCache:
+            # get player HTML 5 sript
+            request = urllib2.Request(playerUrl)
+            try:
+                self.playerData = urllib2.urlopen(request).read()
+                self.playerData = self.playerData.decode('utf-8', 'ignore')
+            except:
+                self.printDBG('Unable to download playerUrl webpage')
+                return ''
+
+            # get main function name 
+            match = re.search("signature=(\w+?)\([^)]\)", self.playerData)
+            if match:
+                mainFunName = match.group(1)
+                self.printDBG('Main signature function name = "%s"' % mainFunName)
+            else: 
+                self.printDBG('Can not get main signature function name')
+                return ''
+
+            self._getfullAlgoCode( mainFunName )
+
+            # wrap all local algo function into one function extractedSignatureAlgo()
+            algoLines = self.fullAlgoCode.split('\n')
+            for i in range(len(algoLines)):
+                algoLines[i] = '\t' + algoLines[i]
+            self.fullAlgoCode  = 'def extractedSignatureAlgo(param):'
+            self.fullAlgoCode += '\n'.join(algoLines)
+            self.fullAlgoCode += '\n\treturn %s(param)' % mainFunName
+            self.fullAlgoCode += '\noutSignature = extractedSignatureAlgo( inSignature )\n'
+
+            # after this function we should have all needed code in self.fullAlgoCode
+
+            self.printDBG( "---------------------------------------" )
+            self.printDBG( "|    ALGO FOR SIGNATURE DECRYPTION    |" )
+            self.printDBG( "---------------------------------------" )
+            self.printDBG( self.fullAlgoCode                         )
+            self.printDBG( "---------------------------------------" )
+
+            try:
+                algoCodeObj = compile(self.fullAlgoCode, '', 'exec')
+            except:
+                self.printDBG('decryptSignature compile algo code EXCEPTION')
+                return ''
+        else:
+            # get algoCodeObj from algoCache
+            self.printDBG('Algo taken from cache')
+            algoCodeObj = self.algoCache[playerUrl]
+
+        # for security alow only flew python global function in algo code
+        vGlobals = {"__builtins__": None, 'len': len, 'list': list}
+
+        # local variable to pass encrypted sign and get decrypted sign
+        vLocals = { 'inSignature': s, 'outSignature': '' }
+
+        # execute prepared code
+        try:
+            exec( algoCodeObj, vGlobals, vLocals )
+        except:
+            self.printDBG('decryptSignature exec code EXCEPTION')
+            return ''
+
+        self.printDBG('Decrypted signature = [%s]' % vLocals['outSignature'])
+        # if algo seems ok and not in cache, add it to cache
+        if playerUrl not in self.algoCache and '' != vLocals['outSignature']:
+            self.printDBG('Algo from player [%s] added to cache' % playerUrl)
+            self.algoCache[playerUrl] = algoCodeObj
+
+        # free not needed data
+        self._cleanTmpVariables()
+
+        return vLocals['outSignature']
+
+    # Note, this method is using a recursion
+    def _getfullAlgoCode( self, mainFunName, recDepth = 0 ):
+        if self.MAX_REC_DEPTH <= recDepth:
+            self.printDBG('_getfullAlgoCode: Maximum recursion depth exceeded')
+            return 
+
+        funBody = self._getLocalFunBody( mainFunName )
+        if '' != funBody:
+            funNames = self._getAllLocalSubFunNames(funBody)
+            if len(funNames):
+                for funName in funNames:
+                    if funName not in self.allLocalFunNamesTab:
+                        self.allLocalFunNamesTab.append(funName)
+                        self.printDBG("Add local function %s to known functions" % mainFunName)
+                        self._getfullAlgoCode( funName, recDepth + 1 )
+
+            # conver code from javascript to python 
+            funBody = self._jsToPy(funBody)
+            self.fullAlgoCode += '\n' + funBody + '\n'
+        return
 
     def getVideoPageFromYoutube(self, get):
         login = "false"
@@ -354,6 +538,7 @@ class YouTubePlayer():
             login = "true"
 
         page = self.core._fetchPage({u"link": self.urls[u"video_stream"] % get(u"videoid"), "login": login})
+        self.common.log("Step1: " + repr(page["content"].find("ytplayer")))
 
         if not page:
             page = {u"status":303}
@@ -376,7 +561,7 @@ class YouTubePlayer():
                 self.login._httpLogin({"new":"true"})
                 result = self.getVideoPageFromYoutube(get)
             else:
-                self.utils.showMessage(self.language(30600), self.language(30622))
+                video[u"apierror"] = self.language(30622)
 
         if result[u"status"] != 200:
             self.common.log(u"Couldn't get video page from YouTube")
@@ -384,7 +569,7 @@ class YouTubePlayer():
 
         links = self.scrapeWebPageForVideoLinks(result, video)
 
-        if len(links) == 0:
+        if len(links) == 0 and not( "hlsvp" in video ):
             self.common.log(u"Couldn't find video url- or stream-map.")
 
             if not u"apierror" in video:

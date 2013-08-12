@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.1.0" provider-name="Digitalprom">
+<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.4.0" provider-name="Digitalprom">
 	<extension point="xbmc.addon.repository" name="DPMC Addons repository">
 		<info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml</info>
-		<checksum>http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
+		<checksum>https://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
 		<datadir zip="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">

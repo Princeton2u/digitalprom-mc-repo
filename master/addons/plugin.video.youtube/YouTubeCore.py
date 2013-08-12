@@ -861,8 +861,11 @@ class YouTubeCore():
             video["Plot"] = self.getVideoDescription(node, uploadDate, viewCount)
 
             video['thumbnail'] = self.urls["thumbnail"] % video['videoid']
+            ch_list=self.settings.getSetting("BLchannels").split('|')
+            black_list=ch_list
+            if video["Studio"] not in black_list: ytobjects.append(video)
 
-            ytobjects.append(video)
+            #ytobjects.append(video)
 
         self.addNextPageLinkIfNecessary(params, xml, ytobjects)
 

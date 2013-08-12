@@ -7,6 +7,7 @@ import urllib
 import urllib2
 import sys
 import os
+import shutil
 import xbmcplugin
 import xbmcgui
 import xbmc
@@ -113,6 +114,10 @@ def initScreen(args):
 				dp.update(25 * i)
 			zipdata.close()
 			os.remove('/storage/.update/firmware.zip')
+			shutil.rmtree('/storage/.cache')
+			shutil.rmtree('/storage/.config')
+			shutil.rmtree('/storage/.ssh')
+			shutil.rmtree('/storage/.xbmc')
 			dp.close()
 			xbmc.restart()
 

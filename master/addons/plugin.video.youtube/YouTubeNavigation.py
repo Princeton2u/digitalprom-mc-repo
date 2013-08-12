@@ -151,6 +151,11 @@ class YouTubeNavigation():
             self.playlist.playAll(params)
         if (get("action") == "add_to_playlist"):
             self.playlist.addToPlaylist(params)
+        if (get("action") == "hide"):
+            self.HideChannel(params)
+        if (get("action") == "hideclear"):
+            self.HideClear(params)
+
         if (get("action") == "remove_from_playlist"):
             self.playlist.removeFromPlaylist(params)
         if (get("action") == "delete_playlist"):
@@ -315,7 +320,16 @@ class YouTubeNavigation():
             self.utils.showMessage(self.language(30614), get("contact"))
             self.xbmc.executebuiltin("Container.Refresh")
         return True
-
+    def HideClear(self, params={}):
+                self.settings.setSetting("BLchannels",'0')
+                print 'blacklist cleared'
+    def HideChannel(self, params={}):
+                if not self.settings.getSetting("BLchannels"):
+                        self.settings.setSetting("BLchannels",params['channel'])
+                else:
+                        ch_list="%s|%s"%(self.settings.getSetting("BLchannels"),params['channel'])
+                        self.settings.setSetting("BLchannels",ch_list)
+                print params
     def addSubscription(self, params={}):
         self.common.log("", 5)
         get = params.get
@@ -541,6 +555,8 @@ class YouTubeNavigation():
 
         if (get("feed") != "uploads" and get("user_feed") != "uploads"):
             cm.append((self.language(30516) % studio, "XBMC.Container.Update(%s?path=%s&feed=uploads&channel=%s)" % (sys.argv[0], get("path"), url_studio)))
+        if (get("feed") != "uploads" and get("user_feed") != "uploads"):
+            cm.append(("hide %s" % studio, "XBMC.RunPlugin(%s?path=%s&channel=%s&action=hide)" % (sys.argv[0], get("path"), url_studio)))
 
         cm.append((self.language(30514), "XBMC.Container.Update(%s?path=%s&feed=search&search=%s)" % (sys.argv[0], get("path"), url_title)))
         cm.append((self.language(30527), "XBMC.Container.Update(%s?path=%s&feed=related&videoid=%s)" % (sys.argv[0], get("path"), item("videoid"))))

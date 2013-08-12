@@ -1,0 +1,8 @@
+#!/bin/sh
+
+################################################################################
+#      This file is part of Alex@ELEC - http://www.alexelec.ru
+#      Copyright (C) 2011-2013 Alexandr Zuyev (alex@alexelec.ru)
+################################################################################
+
+killall -9 ace_start.py > /dev/null 2>&1

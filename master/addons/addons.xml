@@ -2,7 +2,7 @@
 <addons>
 <addon id="metadata.album.universal"
        name="Universal Album Scraper"
-       version="1.7.7b"
+       version="2.1.0"
        provider-name="Olympia, Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -11,7 +11,7 @@
     <import addon="metadata.common.musicbrainz.org" version="1.2.3"/>
     <import addon="metadata.common.fanart.tv" version="2.1.2"/>
     <import addon="metadata.common.amazon.de" version="1.0.0"/>
-    <import addon="metadata.common.theaudiodb.com" version="1.4.0"/>
+    <import addon="metadata.common.theaudiodb.com" version="1.7.0"/>
   </requires>
   <extension point="xbmc.metadata.scraper.albums"
              language="en"
@@ -103,16 +103,16 @@
 
 <addon id="metadata.artists.universal"
        name="Universal Artist Scraper"
-       version="2.6.6b"
+       version="3.3.0"
        provider-name="Olympia, Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
     <import addon="metadata.common.last.fm" version="1.6.0"/>
-    <import addon="metadata.common.allmusic.com" version="2.6.0"/>
+    <import addon="metadata.common.allmusic.com" version="3.0.0"/>
     <import addon="metadata.common.musicbrainz.org" version="1.3.0"/>
-    <import addon="metadata.common.htbackdrops.com" version="1.2.0"/>
     <import addon="metadata.common.fanart.tv" version="2.1.2"/>
     <import addon="metadata.common.theaudiodb.com" version="1.5.0"/>
+    <import addon="metadata.common.htbackdrops.com" version="1.3.0"/>
   </requires>
   <extension point="xbmc.metadata.scraper.artists"
              language="en"
@@ -204,7 +204,7 @@
 
 <addon id="metadata.common.allmusic.com"
        name="AllMusic"
-        version="2.6.0"
+        version="3.0.1"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -305,7 +305,7 @@
 
 <addon id="metadata.common.hdtrailers.net"
        name="HD-Trailers common scraper functions"
-       version="1.0.9"
+       version="2.0.2"
        provider-name="Bence Nádas (olympia)">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -340,7 +340,7 @@
 
 <addon id="metadata.common.htbackdrops.com"
        name="HTBackdrops"
-       version="1.2.0"
+       version="1.3.0"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="1.0"/>
@@ -381,7 +381,7 @@
 
 <addon id="metadata.common.imdb.com"
        name="IMDB Scraper Library"
-       version="2.7.6"
+       version="2.7.7"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -455,7 +455,7 @@
 
 <addon id="metadata.common.musicbrainz.org"
        name="musicbrainz"
-        version="1.3.1b"
+        version="2.0.1"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -498,7 +498,7 @@
 
 <addon id="metadata.common.theaudiodb.com"
        name="TheAudioDb Common Scraper Functions"
-       version="1.6.1"
+       version="1.7.1"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -541,7 +541,7 @@
 
 <addon id="metadata.common.themoviedb.org"
        name="The Movie Database Scraper Library"
-       version="2.9.3"
+       version="2.9.5"
        provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.metadata" version="2.1.0"/>
@@ -884,6 +884,24 @@
   </extension>
 </addon>
 
+<addon id="plugin.audio.sradio.ru"
+       name="SRADIO.RU"
+       version="0.0.2"
+       provider-name="HD-Lab Team">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>SRADIO.RU: слушайте FM и интернет радио со всего мира</summary>
+    <description>SRADIO.RU: слушайте FM и интернет радио со всего мира</description>
+  </extension>
+</addon>
+
 <addon id="plugin.image.google"
        name="google"
        version="0.9.2"
@@ -927,6 +945,25 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.720hd.ru"
+       name="[COLOR FF00FF00]Кино портал HD ([/COLOR][COLOR FFFFF000]720hd.ru[/COLOR][COLOR FF00FF00])[/COLOR]"
+       version="1.0.9"
+       provider-name="Silen">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+             provides="video"
+             library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>my-hit.ru</summary>
+    <description>HD (720p) фильмы онлайн (ВКонтакте + RuVideo).</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.cinema.mosfilm.ru"
        name="[COLOR FF00FF00]Мосфильм ([/COLOR][COLOR FFFFF000]cinema.mosfilm.ru[/COLOR][COLOR FF00FF00])[/COLOR]"
        version="1.0.2"
@@ -946,6 +983,16 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.inetcom.tv" name="[COLOR FF86BA0D]Inetcom.tv[/COLOR]" version="0.3.0" provider-name="Silhouette">
+  <requires><import addon="xbmc.python" version="1.0"/></requires>
+  <extension point="xbmc.python.pluginsource"  provides="video" library="default.py"><provides>video</provides></extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Online TV from inetcom.tv</summary>
+    <description>Online TV from inetcom.tv</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.ivi.ru" name="ivi.ru" version="2.5.1" provider-name="ivi.ru (NuisMons)">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource" provides="video" library="default.py"><provides>video</provides></extension>
@@ -959,7 +1006,26 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.youtube" name="YouTube" provider-name="TheCollective" version="4.4.4">
+<addon id="plugin.video.nowfilms.ru"
+       name="NowFilms.ru"
+       version="1.0.6"
+       provider-name="Silen, akgdrg">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+             provides="video"
+             library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>my-hit.ru</summary>
+    <description>Медиапортал [COLOR FF00FFFF]Now[/COLOR][COLOR FFFF0040]Films.ru[/COLOR] - фильмы, сериалы.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.youtube" name="YouTube" provider-name="TheCollective" version="4.4.6nu3">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.simplejson" version="2.0.10" />
@@ -1092,10 +1158,10 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   </extension>
 </addon>
 
-<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.1.0" provider-name="Digitalprom">
+<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.4.0" provider-name="Digitalprom">
 	<extension point="xbmc.addon.repository" name="DPMC Addons repository">
 		<info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml</info>
-		<checksum>http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
+		<checksum>https://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
 		<datadir zip="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
@@ -1108,7 +1174,7 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
 
 <addon id="script.3vi.updater"
 	name="3vi Updater"
-	version="1.0.1"
+	version="1.4.0"
 	provider-name="Digitalprom">
 
 	<requires>
@@ -1122,7 +1188,7 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
 	</extension>
 </addon>
 
-<addon id="script.common.plugin.cache" name="Common plugin cache" provider-name="TheCollective" version="2.5.1">
+<addon id="script.common.plugin.cache" name="Common plugin cache" provider-name="TheCollective" version="2.5.2">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
   </requires>
@@ -1133,6 +1199,20 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
     <summary lang="en">Common caching api for xbmc plugins.</summary>
   </extension>
   <extension library="lib" point="xbmc.python.module" />
+</addon>
+
+<addon id="script.module.elementtree"
+       name="Elementtree XML parser"
+       version="1.2.7"
+       provider-name="http://effbot.org/zone/element-index.htm">
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+  </extension>
 </addon>
 
 <addon id="script.module.parsedom" name="Parsedom for xbmc plugins" provider-name="TheCollective" version="2.5.1">
@@ -1176,15 +1256,57 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
 
 <addon id="script.module.simplejson"
        name="simplejson"
-       version="2.0.10"
-       provider-name="code.google.com/simplejson">
+       version="3.3.0"
+       provider-name="Martijn">
   <requires>
-    <import addon="xbmc.python" version="2.0.0"/>
+    <import addon="xbmc.python" version="2.1.0"/>
   </requires>
   <extension point="xbmc.python.module"
              library="lib" />
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
+    <language></language>
+    <summary lang="en">Simple, fast, extensible JSON encoder/decoder for Python</summary>
+    <description lang="en">Simple, fast, extensible JSON encoder/decoder for Python</description>
+    <disclaimer lang="en">Code taken from https://pypi.python.org/pypi/simplejson/</disclaimer>
+    <license>MIT License, Academic Free License v. 2.1</license>
+    <website>https://pypi.python.org/pypi/simplejson/</website>
+    <source>https://pypi.python.org/pypi/simplejson/</source>
+  </extension>
+</addon>
+
+<addon id='script.module.torrent.ts' version='1.3.11' name='TorrentStream Engine Support' provider-name='AlexELEC'>
+  <requires>
+    <import addon="xbmc.python" version="2.0"/>
+    <import addon="script.module.beautifulsoup"/>
+    <import addon="script.module.simplejson"/>
+    <import addon="script.module.simple.downloader"/>
+  </requires>
+  <extension point='xbmc.addon.metadata'>
+    <platform>all</platform>
+    <summary>TorrentStream Engine Playing</summary>
+  </extension>
+  <extension library="default.py" point="xbmc.service" />
+  <extension point='xbmc.python.module' library='lib' />
+</addon>
+
+<addon id="script.rss.editor"
+       name="RSS Editor"
+       version="2.0.3"
+       provider-name="rwparris2">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.script"
+             library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">A Script for editing XBMC's built in RSS Ticker</summary>
+    <summary lang="hu">RSS forrás szerkesztő</summary>
+    <summary lang="de">Skript zum Bearbeiten des XBMC internen RSS Tickers</summary>
+    <description lang="en">A Script for editing XBMC's built in RSS Ticker</description>
+    <description lang="hu">A szkript képes szerkeszteni az XBMC beépített RSS forrás készletét</description>
+    <description lang="de">Skript zum Bearbeiten des XBMC internen RSS Tickers</description>
   </extension>
 </addon>
 
@@ -1475,6 +1597,170 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   </extension>
 </addon>
 
+<addon id="weather.wunderground" name="Weather Underground" version="2.0.2" provider-name="Team XBMC">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" version="2.0.10"/>
+	</requires>
+	<extension point="xbmc.python.weather" library="default.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="af">Weer voorspelling vanaf wunderground.com</summary>
+		<summary lang="am">የአየር ንብረት ከ wunderground.com</summary>
+		<summary lang="ar">توقعات الطقس من wunderground.com</summary>
+		<summary lang="be">Прагноз надвор'я з wunderground.com</summary>
+		<summary lang="bg">Синоптична прогноза от wunderground.com</summary>
+		<summary lang="ca">Previsió del temps de wunderground.com</summary>
+		<summary lang="cs">Předpověď počasí z wunderground.com</summary>
+		<summary lang="cy">Rhagolygon tywydd gan wunderground.com</summary>
+		<summary lang="da">Vejrudsigt fra wunderground.com</summary>
+		<summary lang="de">Wettervorhersage von wunderground.com</summary>
+		<summary lang="el">Πρόγνωση καιρού από το wunderground.com</summary>
+		<summary lang="en">Weather forecast from wunderground.com</summary>
+		<summary lang="es">Predicción meteorológica de wunderground.com</summary>
+		<summary lang="es_AR">Pronóstico meteorológico de wunderground.com</summary>
+		<summary lang="es_MX">Pronóstico de wunderground.com</summary>
+		<summary lang="et">Ilmaennustus portaalist wunderground.com</summary>
+		<summary lang="eu">Eguraldi iragarpena wunderground.com-etik</summary>
+		<summary lang="fi">Sääennusteet wunderground.com-sivustolta</summary>
+		<summary lang="fo">Veðurforsøgn frá wunderground.com</summary>
+		<summary lang="fr">Prévisions météo fournies par wunderground.com</summary>
+		<summary lang="gl">Predición meteorolóxica de wunderground.com</summary>
+		<summary lang="he">תחזית מזג האויר מאת wunderground.com</summary>
+		<summary lang="hr">Prognoza vremena s wunderground.com</summary>
+		<summary lang="hu">Időjárás előrejelzés a wunderground.com-tól</summary>
+		<summary lang="is">Veðurspár frá wunderground.com</summary>
+		<summary lang="it">Meteo fornito da wunderground.com</summary>
+		<summary lang="ja">wunderground.com 天気予報</summary>
+		<summary lang="ko">wunderground.com 날씨예보</summary>
+		<summary lang="lt">Orų prognozė nuo/iš wunderground.com</summary>
+		<summary lang="mk">Временска прогноза од wunderground.com</summary>
+		<summary lang="my">wunderground.com မှ ရာသီဥတုခန့်မှန်းချက်</summary>
+		<summary lang="nl">Weersvoorspelling van wunderground.com</summary>
+		<summary lang="no">Værvarsel fra wunderground.com</summary>
+		<summary lang="pl">Prognoza pogody ze strony wunderground.com</summary>
+		<summary lang="pt">Previsão meteorológica a partir de wunderground.com</summary>
+		<summary lang="pt_BR">Previsão do tempo por wunderground.com</summary>
+		<summary lang="ro">Starea vremii de la wunderground.com</summary>
+		<summary lang="ru">Прогноз погоды с сайта wunderground.com</summary>
+		<summary lang="sk">Predpoveď počasia z wunderground.com</summary>
+		<summary lang="sl">Vremenska napoved, ki jo zagotavlja wunderground.com</summary>
+		<summary lang="sq">Parashikimi i motit nga wunderground.com</summary>
+		<summary lang="sv">Väderprognos från wunderground.com</summary>
+		<summary lang="ta_IN">Wunderground.com இருந்து வானிலை முன்னறிவிப்பு</summary>
+		<summary lang="th">พยากรณ์อากาศจาก wunderground.com</summary>
+		<summary lang="tr">Hava durumu wunderground.com sitesinden alınır</summary>
+		<summary lang="uk">Прогноз погоди з wunderground.com</summary>
+		<summary lang="uz">wunderground.com dan ob-havo ma'lumoti</summary>
+		<summary lang="vi">Dự báo thời tiết từ wunderground.com</summary>
+		<summary lang="vi_VN">Dự báo thời tiết từ wunderground.com</summary>
+		<summary lang="zh">来自wunderground.com的天气预报</summary>
+		<summary lang="zh_TW">weatherground.com 上的天氣預報</summary>
+		<description lang="af">Weer voorspelling verskaf deur Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="am">የአየር ንብረት የሚቀርበው በ Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="ar">توقعات الطقس من تقديم Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="be">Прагноз надвор'я створаны Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="bg">Синоптична прогноза с данните от Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="ca">Previsió del temps proporcionada per Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="cs">Předpověď počasí poskytnuta stránkou Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="cy">Rhagolygon tywydd gan Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="da">Vejrudsigten leveres af Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="de">Wettervorhersage bereitgestellt durch Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="el">Η πρόγνωση καιρού παρέχεται από το Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="en">Weather forecast provided by Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="es">Predicción meteorológica proporcionada por Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="es_AR">Pronóstico meteorológico proporcionado por Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="es_MX">Pronóstico del tiempo por Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="et">Ilma ennustab Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="fi">Sääennusteet Weather Underground -sivuston tarjoamina (http://www.wunderground.com/)</description>
+		<description lang="fo">Veðurforsøgnin er latin av Weather Underground (http://www.wunderground.com)</description>
+		<description lang="fr">Prévisions météo fournies par Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="gl">Predición meteorolóxica provista por Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="he">תחזית מזג האויר ניתנת ע"י Weather Underground (http://www.wunderground.com</description>
+		<description lang="hr">Prognozu vremena omogućava Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="hu">Az előrejelzést a Weather Underground (http://www.wunderground.com/) szolgáltatja </description>
+		<description lang="is">Veðurspár frá Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="it">Meteo fornito da Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="ja">Weather Underground (http://www.wunderground.com/) 提供の天気予報</description>
+		<description lang="ko">Weather Underground (http://www.wunderground.com/)가 제공하는 날씨예보</description>
+		<description lang="lt">Orų prognozė teikiama (pateikiama) iš Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="mk">Временска прогноза обезбедена од Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="my">ရာသီဥတုခန့်မှန်းချက်ကို Weather Underground (http://www.wunderground.com/) မှထောက်ပံ့ပေးထားပါသည်။</description>
+		<description lang="nl">Weersvoorspelling voorzien door Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="no">Værvarsel fra Weather Underground (http://www.wunderground.com)</description>
+		<description lang="pl">Prognoza pogody jest dostarczona dzięki uprzejmości serwisu: (http://www.wunderground.com/)</description>
+		<description lang="pt">Previsão meteorológica fornecida por Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="pt_BR">Previsão do tempo por Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="ro">Starea vremii furnizată de Weather Underground &#10;(http://www.wunderground.com/)</description>
+		<description lang="ru">Прогноз погоды предоставлен компанией Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="sk">Predpoveď počasia poskytovaná od Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="sl">Vremenska napoved, ki jo zagotavlja Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="sq">Parashikimi i motit i pajisur nga Weahter Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="sv">Väderprognos tillhandahållen av Weather Underground&#10;(http://www.wunderground.com/)</description>
+		<description lang="ta_IN">வானிலை முன்னறிவிப்பு வழங்குபவர் வானிலை அண்டர்கிரவுண்டு (http://www.wunderground.com/)</description>
+		<description lang="th">พยากรณ์อากาศโดย Weather Underground &#10;(http://www.wunderground.com/)</description>
+		<description lang="tr">Hava durumu Weather Underground (http://www.wunderground.com/)  tarafından sağlanır</description>
+		<description lang="uk">Прогноз погоди надано Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="uz">Ob-havo ma'lumoti Weather Underground (http://www.wunderground.com/) tomonidan taqdim etilgan</description>
+		<description lang="vi">Dự báo thời tiết từ Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="vi_VN">Dự báo thời tiết được cung cấp bởi Weather Underground (http://www.wunderground.com/)</description>
+		<description lang="zh">由Weather Underground（http://www.wunderground.com/）提供的天气预报</description>
+		<description lang="zh_TW">天氣預報由 Weather Underground (http://www.wunderground.com/) 所提供</description>
+		<disclaimer lang="af">Die gebruik van hierdie byvoegsel impliseer dat U saamstem met die Terme van Diens uiteengesit op http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="ar">استعمالك لهذه الإضافة يعني انك وافقت على شروط الإستخدام الموجودة على الرابط http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="be">Выкарыстаньне гэтага дадатку пацьвярджае што вы згаджаецеся з Умовамі Выкарыстаньня што знаходзяцца на http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="bg">Употребявайки добавката Вие се съгласявате с условията за ползване на услугата, които се намират на http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="ca">L'ús d'aquest complement implica que vostè ha acceptat els termes de servei ubicats a http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="cs">Používáním tohoto rozšíření schvalujete podmínky užívání umístěné na http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="cy">Mae defnyddio'r ategyn yma'n awgrymu eich bod yn cytuno i'r Amodau Gwasanaeth sydd yn http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="da">Brug af denne addon indebærer, at du har erklæret dig enig i vilkårene for tjenesten, der findes på http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="de">Mit Benutzung dieses Addons bestätigen Sie, dass Sie den Nutzungsbedingungen auf http://www.wunderground.com/weather/api/d/terms.html zustimmen.</disclaimer>
+		<disclaimer lang="el">Χρήση αυτού του πρόσθετου συνεπάγεται την αποδοχή των Όρων Χρήσης της Υπηρεσίας (Terms of Service) οι οποίοι βρίσκονται στο http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="en">Use of this add-on implies that you have agreed to the Terms of Service located at http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="es">Al usar este complemento, aceptas los términos de uso de http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="es_AR">Al usar este complemento, aceptas los términos de uso de http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="es_MX">El uso de este add-on implica que usted esta de acuerdo con los Términos de Servicio localizados en http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="et">Selle lisamooduli kasutamine viitab sellele, et te olete nõustunud kasutajatingimustega aadressil http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="eu">Gehigarri hau erabiltzeak http://www.wunderground.com/weather/api/d/terms.html -en aurkitzen diren zerbitzu baldintzak onartzen inplikatzen du.</disclaimer>
+		<disclaimer lang="fi">Tämän lisäosan käyttäminen tarkoittaa, että olet hyväksynyt osoitteessa http://www.wunderground.com/weather/api/d/terms.html sijaitsevat käyttöehdot</disclaimer>
+		<disclaimer lang="fo">Nýtsla av hesi víðkan merkir at tú góðtekur treytirnar sum finnast á http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="fr">L'utilisation de cette extension implique votre acceptation des Conditions Générales d'Utilisation disponibles sur http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="gl">Empregar este Engadido implica que vostede aceptou os termos de servizo localizados en http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="he">שימוש בתוסף זה משתמע שאישרת את תנאי השימוש אשר ממוקמים בכתובת הבאה http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="hr">Upotreba ovog dodatka podrazumijeva da se slažete s Pravilima korištenja koja se nalaze na http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="hu">A kiegészítő használatával elfogadod a következő feltételeket: http://www.wunderground.com/weather/api/d/terms.html&#10;&#10;    </disclaimer>
+		<disclaimer lang="is">Notkun á þessari viðbót gefur til kynna að þú hafir samþykkt skilmálana sem finna má á http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="it">Usando questo add-on accetti i Termini di Servizio consultabili su http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="ja">このアドオンを使うと、http://www.wunderground.com/weather/api/d/terms.html にある規約に合意したものと見なされます</disclaimer>
+		<disclaimer lang="ko">이 애드온을 사용하는 것은 http://www.wunderground.com/weather/api/d/terms.html 에 있는 서비스 약관에 동의함을 의미합니다</disclaimer>
+		<disclaimer lang="lt">Naudodami šį priedą jūs sutinate(-kote) su paslaugų teikimo sąlygomis esančiomis http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="mk">Користење на овој додаток имплицира дека се согласувате со условите за користење кои се наоѓаат на http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="my">ဒီ add-on ကိုသုံးခြင်းသည် http://www.wunderground.com/weather/api/d/terms.html တွင်ရှိသော Terms of Service ကိုသဘောတူညီဟု သတ်မှတ်သည်</disclaimer>
+		<disclaimer lang="nl">Het gebruik van deze add-on impliceert dat je akkoord gaat met de service-voorwaarden op http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="no">Bruken av dette tillegget betinger at du har godkjent brukervilkårene på http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="pl">Korzystanie z tego dodatku jest równoważne z akceptacją regulaminu dostępnego pod adresem: http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="pt">O uso deste Add-on implica o seu acordo com os Termos do Serviço. Pode encontrá-los em http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="pt_BR">Usar este add-on implica que você concorda com os termos de uso localizados em http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="ro">Folosirea acestui plugin implică acceptarea Termenilor și Serviciilor aflate la adresa http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="ru">Используя это дополнение, вы соглашаетесь с условиями предоставления услуг, доступными по адресу http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="sk">Používaním tohto doplnku súhlasíte s podmienkami používania služby umiestnenými na http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="sl">Z uporabo vtičnika se strinjate s Pogoji uporabe, ki se nahajajo na http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="sq">Përdorimi i kësaj shtesës nënkupton që ke lexuar Termat e Shërbimit të lokalizuar tek http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="sv">Användning av detta tillägg innebär att ni har accepterat användarvillkoren som går att hitta på&#10;http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="ta_IN">விதிமுறைகள் ஒப்பு கொண்டீர் என்று தெரிகிறது http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="th">ในการใช้บริการโปรแกรมเสริมนี้หมายความว่าคุณได้ยอมรับเงื่อนไขในการให้บริการโดย http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="tr">Bu eklentinin kullanımı aynı zamanda http://www.wunderground.com/weather/api/d/terms.html adresindeki Kullanım Koşullarını da kabul ettiğiniz anlamına gelir.</disclaimer>
+		<disclaimer lang="uk">Скориставшись цією надбудовою, ви тим самим погоджуєтеся з умовами використання: http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="vi">Khi sử dụng add-on này đồng nghĩa với việc bạn đồng ý với các điều khoản sử dụng dịch vụ của nhà cung cấp tại địa chỉ http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="vi_VN">Sử dụng add-on này hàm ý rằng bạn đã đồng ý với các điều khoản của dịch vụ có ở http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="zh">使用此扩展功能意味着你同意此连接下的服务条款：http://www.wunderground.com/weather/api/d/terms.html</disclaimer>
+		<disclaimer lang="zh_TW">使用這個附加元件代表你同意 http://www.wunderground.com/weather/api/d/terms.html 所載之使用者條款</disclaimer>
+		<language></language>
+		<platform>all</platform>
+		<forum>http://forum.xbmc.org/showthread.php?tid=116668</forum>
+		<source>https://code.google.com/p/ronie/source/</source>
+	</extension>
+</addon>
+
 <addon
   id="webinterface.default"
   version="2.1.5"
@@ -1570,7 +1856,36 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   </extension>
 </addon>
 
-<addon id="xbmc.addon" version="12.9.5" provider-name="Team XBMC">
+<addon id="xbmc-vk.svoka.com" name="VK-xbmc" version="0.8.3" provider-name="shchvova">
+	<requires>
+		<import addon="xbmc.python" version="2.0"/>
+<!-- 		<import addon="script.module.simple.downloader.beta" version="0.9.1"/>
+ -->
+    </requires>
+	<extension point="xbmc.python.pluginsource" provides="image, audio, video" library="default.py">
+		<provides>image video audio</provides>
+	</extension>
+
+	<extension point="xbmc.addon.repository" name="VK XBMC Add-ons">
+		<info compressed="false">http://xbmc-vk-repo.googlecode.com/svn/trunk/addons/addons.xml</info>
+		<checksum>http://xbmc-vk-repo.googlecode.com/svn/trunk/addons/addons.xml.md5</checksum>
+		<datadir zip="false">http://xbmc-vk-repo.googlecode.com/svn/trunk/addons/</datadir>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Video, audio and photos from VKontakte social network http://vkontakte.ru/</summary>
+		<description lang="en">Video from VKontakte social network http://vkontakte.ru/
+homepage - http://code.svoka.com/vk-xbmc-plugin
+Author - Vlad Svoka aka Shchvova</description>
+		<summary lang="ru">Видео с сайта http://vkontakte.ru/</summary>
+		<description lang="ru">Видео, аудио и фотографии с сайта http://vkontakte.ru/
+Домашняя страница проекта - http://code.svoka.com/vk-xbmc-plugin
+Автор - Влад Свока aka Shchvova</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="xbmc.addon" version="12.1.0" provider-name="Team XBMC">
   <backwards-compatibility abi="12.0"/>
   <requires>
     <import addon="xbmc.core" version="0.1.0"/>
@@ -1625,7 +1940,7 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   <extension-point id="scraper.library" schema="scraper.xsd"/>
 </addon>
 
-<addon id="xbmc.pvr" version="1.7.0" provider-name="Team XBMC">
+<addon id="xbmc.pvr" version="1.6.0" provider-name="Team XBMC">
   <requires>
     <import addon="xbmc.core" version="0.1.0"/>
   </requires>
