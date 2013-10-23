@@ -1007,13 +1007,13 @@
 </addon>
 
 <addon id="plugin.video.youtube" name="YouTube" provider-name="TheCollective" version="4.4.6nu3">
-  <!--requires>
+  <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.simplejson" version="2.0.10" />
     <import addon="script.common.plugin.cache" version="2.5.1" />
     <import addon="script.module.parsedom" version="2.5.1" />
     <import addon="script.module.simple.downloader" version="1.9.4" />
-  </requires-->
+  </requires>
   <extension library="default.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
   </extension>
@@ -1141,9 +1141,9 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
 
 <addon id="repository.digitalprom" name="3vi SmartTV repository" version="1.5.0" provider-name="Digitalprom">
   <extension point="xbmc.addon.repository" name="3vi SmartTV repository">
-    <info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml</info>
-    <checksum>https://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
-    <datadir zip="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons</datadir>
+    <info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/addons/addons.xml</info>
+    <checksum>https://digitalprom-mc-repo.googlecode.com/git/addons/addons.xml.md5</checksum>
+    <datadir zip="false">http://digitalprom-mc-repo.googlecode.com/git/addons</datadir>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>Репозиторий 3vi SmartTV</summary>

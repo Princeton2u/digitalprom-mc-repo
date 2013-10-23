@@ -16,15 +16,15 @@ import traceback
 import zipfile
 
 Addon         = xbmcaddon.Addon(id='script.3vi.updater')
-AddonLanguage      = Addon.getLocalizedString
-AddonIcon    = Addon.getAddonInfo('icon')
-AddonFanart  = Addon.getAddonInfo('fanart')
-AddonPath    = Addon.getAddonInfo('path')
-AddonType    = Addon.getAddonInfo('type')
-AddonId      = Addon.getAddonInfo('id')
-AddonAuthor  = Addon.getAddonInfo('author')
-AddonName    = Addon.getAddonInfo('name')
-AddonVersion = Addon.getAddonInfo('version')
+AddonLanguage = Addon.getLocalizedString
+AddonIcon     = Addon.getAddonInfo('icon')
+AddonFanart   = Addon.getAddonInfo('fanart')
+AddonPath     = Addon.getAddonInfo('path')
+AddonType     = Addon.getAddonInfo('type')
+AddonId       = Addon.getAddonInfo('id')
+AddonAuthor   = Addon.getAddonInfo('author')
+AddonName     = Addon.getAddonInfo('name')
+AddonVersion  = Addon.getAddonInfo('version')
 
 def error_logging():
     exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -96,7 +96,6 @@ def Downloader(url,dest,description,heading):
         return -9
 
 def initScreen(args):
-	u = urllib2.urlopen('http://digitalprom-mc-repo.googlecode.com/files/repository.xbmc.org.zip')
 	if xbmcgui.Dialog().yesno("Загрузка обновлений", "Загрузить новую прошивку?"):
 		if os.path.isdir('/storage/.update/') != True:
 			os.makedirs('/storage/.update/')
