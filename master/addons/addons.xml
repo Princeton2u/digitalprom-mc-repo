@@ -964,25 +964,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.cinema.mosfilm.ru"
-       name="[COLOR FF00FF00]Мосфильм ([/COLOR][COLOR FFFFF000]cinema.mosfilm.ru[/COLOR][COLOR FF00FF00])[/COLOR]"
-       version="1.0.2"
-       provider-name="Silen">
-  <requires>
-    <import addon="xbmc.python" version="1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource"
-             provides="video"
-             library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Мосфильм (cinema.mosfilm.ru)</summary>
-    <description>Иинтернет-кинотеатр ФГУП «Киноконцерн «Мосфильм» (cinema.mosfilm.ru).</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.inetcom.tv" name="[COLOR FF86BA0D]Inetcom.tv[/COLOR]" version="0.3.0" provider-name="Silhouette">
   <requires><import addon="xbmc.python" version="1.0"/></requires>
   <extension point="xbmc.python.pluginsource"  provides="video" library="default.py"><provides>video</provides></extension>
@@ -1158,7 +1139,7 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
   </extension>
 </addon>
 
-<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.4.0" provider-name="Digitalprom">
+<addon id="repository.digitalprom" name="DPMC Addons repository" version="1.1.0" provider-name="Digitalprom">
 	<extension point="xbmc.addon.repository" name="DPMC Addons repository">
 		<info compressed="false">http://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml</info>
 		<checksum>https://digitalprom-mc-repo.googlecode.com/git/master/addons/addons.xml.md5</checksum>
@@ -1872,35 +1853,6 @@ Raadpleeg de lokale wetgeving voordat u deze plugin installeert.</disclaimer>
     <description lang="zh">XBMC 的默认 web 界面；适应所有分辨率模式</description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="xbmc-vk.svoka.com" name="VK-xbmc" version="0.8.3" provider-name="shchvova">
-	<requires>
-		<import addon="xbmc.python" version="2.0"/>
-<!-- 		<import addon="script.module.simple.downloader.beta" version="0.9.1"/>
- -->
-    </requires>
-	<extension point="xbmc.python.pluginsource" provides="image, audio, video" library="default.py">
-		<provides>image video audio</provides>
-	</extension>
-
-	<extension point="xbmc.addon.repository" name="VK XBMC Add-ons">
-		<info compressed="false">http://xbmc-vk-repo.googlecode.com/svn/trunk/addons/addons.xml</info>
-		<checksum>http://xbmc-vk-repo.googlecode.com/svn/trunk/addons/addons.xml.md5</checksum>
-		<datadir zip="false">http://xbmc-vk-repo.googlecode.com/svn/trunk/addons/</datadir>
-	</extension>
-
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Video, audio and photos from VKontakte social network http://vkontakte.ru/</summary>
-		<description lang="en">Video from VKontakte social network http://vkontakte.ru/
-homepage - http://code.svoka.com/vk-xbmc-plugin
-Author - Vlad Svoka aka Shchvova</description>
-		<summary lang="ru">Видео с сайта http://vkontakte.ru/</summary>
-		<description lang="ru">Видео, аудио и фотографии с сайта http://vkontakte.ru/
-Домашняя страница проекта - http://code.svoka.com/vk-xbmc-plugin
-Автор - Влад Свока aka Shchvova</description>
-		<platform>all</platform>
-	</extension>
 </addon>
 
 <addon id="xbmc.addon" version="12.1.0" provider-name="Team XBMC">
